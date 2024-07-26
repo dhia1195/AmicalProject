@@ -8,6 +8,7 @@ import { SlidesModule } from './slides/slides.module';
 import { ReservationsModule } from './reservations/reservations.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { UserModule } from './user/user.module';
+import { ConventionModule } from './convention/conventions.module';
 
 @Module({
   imports: [
@@ -26,7 +27,8 @@ import { UserModule } from './user/user.module';
       defaults: {
         from: '"No Reply" <noreply@example.com>',
       },
-    }),],
+    }),
+    ConventionModule,],
   controllers: [AppController],
   providers: [AppService],
 })

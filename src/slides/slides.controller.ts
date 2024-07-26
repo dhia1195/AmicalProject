@@ -1,41 +1,41 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Sildes } from './slides.schema';
+import { Slides } from './slides.schema';
 import { SlidesService } from './slides.service';
 
 @Controller('slides')
-export class SlidesController {constructor(private readonly sildesService: SlidesService) {}
+export class SlidesController {constructor(private readonly slidesService: SlidesService) {}
 
 @Post('ajouter')
-async ajouterSprint(
+async ajouterSlide(
     @Body('titre') titre: string,
     @Body('description') description: string,
     @Body('image') image: string,
    
 ) {
-    const nouveauSilde = await this.sildesService.ajouterSilde(titre, description,image);
-    return { slider: nouveauSilde };}
+    const nouveauSlide = await this.slidesService.ajouterSlide(titre, description,image);
+    return { slider: nouveauSlide };}
 
 @Get('getall')
-async getAllFounisserus(){
-    const allSildes = await this.sildesService.getAllSildes();
-    return {sildes : allSildes};
+async getAllSlides(){
+    const allSlides = await this.slidesService.getAllSlides();
+    return {slides : allSlides};
 }    
 @Patch('update/:id')
-async updateSilde(@Param('id') id:string, @Body() updateData: Partial<Sildes>){
+async updateSlide(@Param('id') id:string, @Body() updateData: Partial<Slides>){
 
-    const updatedSilde = await this.sildesService.updateSilde(id,updateData);
-    return{Sildes : updatedSilde};
+    const updatedSlide = await this.slidesService.updateSlide(id,updateData);
+    return{Slides : updatedSlide};
 }
 
 @Delete(':id')
-  async deleteSilde(@Param('id') id: string) {
-    await this.sildesService.deleteSilde(id);
+  async deleteSlide(@Param('id') id: string) {
+    await this.slidesService.deleteSlide(id);
     return { message: 'slider deleted successfully' };
   }
 
 @Get('getbyid/:id')
-  async getSildeById(@Param('id') id: string) {
-    return this.sildesService.getSildeById(id);
+  async getSlideById(@Param('id') id: string) {
+    return this.slidesService.getSlideById(id);
   }
 
 }

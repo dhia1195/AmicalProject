@@ -1,41 +1,41 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Sildes, SildesDocument } from './slides.schema';
+import { Slides, SlidesDocument } from './slides.schema';
 
 @Injectable()
-export class SlidesService {constructor(@InjectModel(Sildes.name) private SildesModel: Model<SildesDocument>){}
+export class SlidesService {constructor(@InjectModel(Slides.name) private SlidesModel: Model<SlidesDocument>){}
 
 
-async ajouterSilde(titre: string, description: string, image:string): Promise<Sildes> {
-        const createdSildes = new this.SildesModel({
+async ajouterSlide(titre: string, description: string, image:string): Promise<Slides> {
+        const createdSlides = new this.SlidesModel({
             titre,
             description,
             image,
         });
     
-        return createdSildes.save();
+        return createdSlides.save();
     }
-async getAllSildes(): Promise<Sildes[]> {
-        const allSildes = await this.SildesModel.find().exec();
-        return allSildes;
+async getAllSlides(): Promise<Slides[]> {
+        const allSlides = await this.SlidesModel.find().exec();
+        return allSlides;
       }
 
-async updateSilde(id: string, updateData: Partial<Sildes>): Promise<Sildes> {
-        const updatedSilde = await this.SildesModel.findByIdAndUpdate(id, updateData, { new: true }).exec();
-        if (!updatedSilde) {
+async updateSlide(id: string, updateData: Partial<Slides>): Promise<Slides> {
+        const updatedSlide = await this.SlidesModel.findByIdAndUpdate(id, updateData, { new: true }).exec();
+        if (!updatedSlide) {
           // Handle the case where the sprint with the given ID was not found
-          throw new Error('Silde not found');
+          throw new Error('Slide not found');
         }
-        return updatedSilde;
+        return updatedSlide;
       }
 
-async deleteSilde(id: string): Promise<void> {
-        await this.SildesModel.findByIdAndDelete(id).exec();
+async deleteSlide(id: string): Promise<void> {
+        await this.SlidesModel.findByIdAndDelete(id).exec();
       }
 
-async getSildeById(id: string): Promise<Sildes> {
-        return this.SildesModel.findById(id).exec();
+async getSlideById(id: string): Promise<Slides> {
+        return this.SlidesModel.findById(id).exec();
       }
 }
 

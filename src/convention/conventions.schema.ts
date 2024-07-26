@@ -2,22 +2,24 @@
 import {  Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
-export type SlidesDocument = Slides & Document;
+export type ConventionsDocument = Conventions & Document;
 
 
 
 @Schema()
-export class Slides{
+export class Conventions{
   
 
   @Prop({ required: true})
   titre: string;
 
   @Prop({ required: true})
-  description: string;
+  status: string;
+  @Prop({ required: true})
+  date: Date;
 
   @Prop({ required: true})
-  image: string;
+  pdf: string;
 
 
 
@@ -30,4 +32,4 @@ export class Slides{
 
 
 
-export const SlidesSchema = SchemaFactory.createForClass(Slides);
+export const ConventionsSchema = SchemaFactory.createForClass(Conventions);
