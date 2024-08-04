@@ -1,0 +1,59 @@
+<div>
+    <h1>Update Event</h1>
+    <form [formGroup]="eventForm" (ngSubmit)="updateEvent()">
+      <div>
+        <label for="titre">Title</label>
+        <input id="titre" formControlName="titre" />
+      </div>
+  
+      <div>
+        <label for="description">Description</label>
+        <input id="description" formControlName="description" />
+      </div>
+  
+      <div>
+        <label for="type">Type</label>
+        <select id="type" formControlName="type">
+          <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
+        </select>
+      </div>
+  
+      <div>
+        <label for="image">Image</label>
+        <input id="image" type="file" (change)="onFileSelected($event)" />
+        <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" style="width: 100px; height: auto;">
+      </div>
+  
+      <div>
+        <label for="dateD">Start Date</label>
+        <input id="dateD" type="date" formControlName="dateD" />
+      </div>
+  
+      <div>
+        <label for="dateF">End Date</label>
+        <input id="dateF" type="date" formControlName="dateF" />
+      </div>
+  
+      <div>
+        <label for="btn_href">Button Link</label>
+        <input id="btn_href" formControlName="btn_href" />
+      </div>
+  
+      <div>
+        <label for="btn_name">Button Name</label>
+        <input id="btn_name" formControlName="btn_name" />
+      </div>
+  
+      <div>
+        <label for="status">Status</label>
+        <input id="status" type="checkbox" formControlName="status" />
+      </div>
+  
+      <button mat-button type="submit">Update Event</button>
+    </form>
+  
+    <div *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+  

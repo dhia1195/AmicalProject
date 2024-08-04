@@ -1,0 +1,48 @@
+<form [formGroup]="eventForm" (ngSubmit)="addEvent()">
+    <div class="form-group">
+      <label for="titre">Titre:</label>
+      <input id="titre" formControlName="titre" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input id="description" formControlName="description" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="type">Type:</label>
+      <select id="type" formControlName="type" class="form-control" required>
+        <option *ngFor="let type of typeOptions" [value]="type">{{ type }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="image">Image:</label>
+      <input id="image" type="file" (change)="onFileSelected($event)" class="form-control">
+      <img *ngIf="imagePreview" [src]="imagePreview" alt="Image preview" class="img-fluid mt-2">
+    </div>
+    <div class="form-group">
+      <label for="dateD">Start Date:</label>
+      <input id="dateD" type="date" formControlName="dateD" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="dateF">End Date:</label>
+      <input id="dateF" type="date" formControlName="dateF" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="btn_href">Button Href:</label>
+      <input id="btn_href" formControlName="btn_href" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="btn_name">Button Name:</label>
+      <input id="btn_name" formControlName="btn_name" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label for="statusEvent">Status:</label>
+      <input type="checkbox" id="statusEvent" formControlName="statusEvent">
+    </div>
+    <button type="submit" class="btn btn-primary">Add Event</button>
+    <a href="http://localhost:4200/ListeEvents" class="btn btn-secondary ml-2">Go to Events List</a>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </form>
+  
