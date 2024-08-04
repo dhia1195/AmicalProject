@@ -3,17 +3,22 @@ import { Slides } from './slides.schema';
 import { SlidesService } from './slides.service';
 
 @Controller('slides')
-export class SlidesController {constructor(private readonly slidesService: SlidesService) {}
+export class SlidesController {
+  constructor(private readonly slidesService: SlidesService) {}
 
-@Post('ajouter')
-async ajouterSlide(
+  @Post('ajouter')
+  async ajouterSlide(
     @Body('titre') titre: string,
     @Body('description') description: string,
     @Body('image') image: string,
-   
-) {
-    const nouveauSlide = await this.slidesService.ajouterSlide(titre, description,image);
-    return { slider: nouveauSlide };}
+    @Body('status') status: boolean,
+    @Body('btn_href') btn_href: string,
+    @Body('btn_name') btn_name: string
+  ) {
+    const nouveauSlide = await this.slidesService.ajouterSlide(titre, description, image, status, btn_href, btn_name);
+    return { slider: nouveauSlide };
+  }
+
 
 @Get('getall')
 async getAllSlides(){

@@ -1,20 +1,36 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Events } from './events.schema';
+import { Events, TypeF } from './events.schema';
 import { EventsService } from './events.service';
 
 @Controller('events')
 export class EventsController {constructor(private readonly eventsService: EventsService) {}
 
 @Post('ajouter')
-async ajouterSprint(
-    @Body('titre') titre: string,
-    @Body('description') description: string,
-    @Body('date') date: Date,
-    @Body('type') type: string,
-   
+async ajouterEvent(
+  @Body('titre') titre: string,
+  @Body('description') description: string,
+  @Body('dateD') dateD: Date,
+  @Body('dateF') dateF: Date,
+  @Body('type') type: TypeF,  // Ensure this matches the TypeF enum
+  @Body('status') status: boolean,
+  @Body('btn_href') btn_href: string,
+  @Body('btn_name') btn_name: string,
+  @Body('image') image?: string,  // Optional field
 ) {
-    const nouveauEvent = await this.eventsService.ajouterEvent(titre, description,date, type);
-    return { event: nouveauEvent };}
+  const nouveauEvent = await this.eventsService.ajouterEvent(
+    titre,
+    description,
+    dateD,
+    dateF,
+    type,
+    status,
+    btn_href,
+    btn_name,
+    image
+  );
+  return { event: nouveauEvent };
+}
+
 
 @Get('getall')
 async getAllFounisserus(){

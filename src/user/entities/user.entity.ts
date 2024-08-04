@@ -9,6 +9,8 @@ export const UserSchema = new mongoose.Schema({
      password: String,
      role: String,
      state: Boolean,
+
+
 });
 export interface User extends Document {
     name: string,
@@ -18,4 +20,6 @@ export interface User extends Document {
     password: string,
     role: string,
     state: boolean,
+   
+
 }

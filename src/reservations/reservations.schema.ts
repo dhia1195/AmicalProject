@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import {  Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
+import { Events } from 'src/events/events.schema';
+import { User } from 'src/user/entities/user.entity';
 
 export type ReservationsDocument = Reservations & Document;
 
@@ -27,7 +29,11 @@ export class Reservations{
   @Prop({ required: true})
   numtel: number;
  
+  @Prop({ type: Types.ObjectId, ref: 'Events' })
+  event: Events;
 
+  @Prop({ type: Types.ObjectId, ref: 'User' })
+  user: User;
 
 
 
@@ -36,4 +42,4 @@ export class Reservations{
 
 
 
-export const ReservationsSchema = SchemaFactory.createForClass(Reservations);//taati l acces ll les class lokhrin
+export const ReservationsSchema = SchemaFactory.createForClass(Reservations);
