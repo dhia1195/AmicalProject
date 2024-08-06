@@ -21,6 +21,9 @@ import { SlidesFrontComponent } from '../../layouts/Front/user-layout/slides-fro
 import { AddEventsComponent } from './add-events/add-events.component';
 import { ListEventsComponent } from './list-events/list-events.component';
 import { UpdateEventsComponent } from './update-events/update-events.component';
+import { UpdateSlidesComponent } from './update-slides/update-slides.component';
+import { DeletedSlidesComponent } from './deleted-slides/deleted-slides.component';
+import { DeletedEventsComponent } from './deleted-events/deleted-events.component';
 
 @NgModule({
   imports: [

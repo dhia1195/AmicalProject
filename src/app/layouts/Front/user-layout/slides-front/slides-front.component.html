@@ -1,15 +1,21 @@
-<div class="carousel">
-  <div class="carousel-inner" #carouselInner>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
     <div *ngFor="let slide of dataSource.data; let i = index" 
          class="carousel-item" 
          [class.active]="i === currentIndex">
-      <img [src]="slide.image" alt="Slide">
+      <img [src]="slide.image" class="d-block w-100" alt="Slide">
       <div class="carousel-caption">
         <h5>{{ slide.titre }}</h5>
         <p>{{ slide.description }}</p>
       </div>
     </div>
   </div>
-  <button class="carousel-control-prev" (click)="prevSlide()">&#10094;</button>
-  <button class="carousel-control-next" (click)="nextSlide()">&#10095;</button>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>

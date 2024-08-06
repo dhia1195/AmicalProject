@@ -55,4 +55,24 @@ export class SlidesService {
       })
     );
   }
+
+  // Nouvelle méthode pour obtenir les diapositives supprimées
+  public getDeletedSlides(): Observable<{ slides: any[] }> {
+    return this._http.get<{ slides: any[] }>(`${this.url}/getdeleted`).pipe(
+      catchError((error: any) => {
+        console.error('Error fetching deleted slides:', error);
+        return throwError('Something went wrong while fetching deleted slides.');
+      })
+    );
+  }
+
+  // Nouvelle méthode pour restaurer une diapositive supprimée
+  public restoreSlide(id: string): Observable<any> {
+    return this._http.put(`${this.url}/restore/${id}`, {}).pipe(
+      catchError((error: any) => {
+        console.error(`Error restoring slide with ID ${id}:`, error);
+        return throwError('Something went wrong while restoring the slide.');
+      })
+    );
+  }
 }

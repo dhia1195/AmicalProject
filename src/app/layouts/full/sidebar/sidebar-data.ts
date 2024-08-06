@@ -12,12 +12,12 @@ export const navItems: NavItem[] = [
   {
     displayName: 'Slides',
     iconName: 'presentation',
-    route: '/AddSlides',
+    route: '/ListeSlides',
   },
   {
     displayName: 'Events',
     iconName: 'calendar',  // Use 'calendar' or another relevant icon name
-    route: '/AddEvents',
+    route: '/ListeEvents',
   },
   
   {

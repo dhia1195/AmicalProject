@@ -1,59 +1,21 @@
-/* Style for the navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #343a40; /* Dark background */
-    padding: 10px 20px;
-  }
-  
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-    color: #f8f9fa; /* Light color for brand text */
-    text-decoration: none;
-  }
-  
-  .logo {
-    height: 50px; /* Adjust the height of the logo */
-    margin-right: 10px;
-  }
-  
-  .navbar-nav {
-    list-style: none;
-    display: flex;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .nav-item {
-    margin: 0 15px;
-  }
-  
-  .nav-link {
-    color: #f8f9fa; /* Light color for nav links */
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-link:hover {
-    color: #007bff; /* Blue color on hover */
-  }
-  
-  .btn-signup {
-    background-color: #007bff; /* Blue background for Sign Up button */
-    color: #fff; /* White text */
-    padding: 8px 16px;
-    border-radius: 4px;
-    text-decoration: none;
-  }
-  
-  .btn-signup:hover {
-    background-color: #0056b3; /* Darker blue on hover */
-  }
-  
-  .active {
-    font-weight: bold;
-    color: #007bff; /* Blue color for active link */
-  }
-  
+/* Custom Styles for the Navbar */
+
+.logo {
+  height: 50px; /* Adjust the height of the logo */
+  margin-right: 10px;
+}
+
+.navbar-nav .nav-item .nav-link.active {
+  font-weight: bold;
+  color: #007bff; /* Blue color for active link */
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #004085;
+}

@@ -1,5 +1,5 @@
 <div class="blank-layout-container justify-content-center align-items-center bg-light-primary">
-  <div class="position-relative row w-100 h-100 bg-gredient justify-content-center">
+  <div class="position-relative row w-100 h-100 bg-gradient justify-content-center">
     <div class="col-lg-4 d-flex align-items-center">
       <mat-card class="cardWithShadow boxed-auth">
         <mat-card-content class="p-32">
@@ -9,19 +9,19 @@
                 src="./assets/images/logos/etap.png"
                 class="align-middle m-2"
                 alt="logo"
-                style="width: 120px; height: auto; margin-right: -5px;" 
+                style="width: 120px; height: auto; margin-right: -5px;"
               />
             </a>
           </div>
 
           <form (ngSubmit)="onLogin()" class="m-t-30">
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Username</mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12">Username</mat-label>
               <input matInput [(ngModel)]="email" name="email" required />
             </mat-form-field>
 
-            <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block">Password</mat-label>
-            <mat-form-field appearance="outline" class="w-100" color="primary">
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12">Password</mat-label>
               <input matInput type="password" [(ngModel)]="password" name="password" required />
             </mat-form-field>
 
@@ -34,6 +34,9 @@
               Sign In
             </button>
 
+            <div *ngIf="errorMessage" class="mt-3 text-center text-danger">
+              {{ errorMessage }}
+            </div>
           </form>
 
           <span class="d-block f-w-500 text-center m-t-24">

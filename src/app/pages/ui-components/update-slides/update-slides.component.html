@@ -1,0 +1,63 @@
+<div>
+    <h1>Update Slide</h1>
+    <form [formGroup]="slideForm" (ngSubmit)="updateSlide()">
+      <div>
+        <label for="titre">Title</label>
+        <input id="titre" formControlName="titre" />
+        <div *ngIf="slideForm.get('titre')?.hasError('required')">
+          <p>Title is required</p>
+        </div>
+      </div>
+  
+      <div>
+        <label for="description">Description</label>
+        <textarea id="description" formControlName="description"></textarea>
+        <div *ngIf="slideForm.get('description')?.hasError('required')">
+          <p>Description is required</p>
+        </div>
+      </div>
+  
+      <div>
+        <label for="image">Image</label>
+        <input id="image" type="file" (change)="onFileSelected($event)" />
+        <img *ngIf="imagePreview" [src]="imagePreview" alt="Image Preview" style="width: 100px; height: auto;">
+        <div *ngIf="slideForm.get('image')?.hasError('required')">
+          <p>Image is required</p>
+        </div>
+      </div>
+  
+      <div>
+        <label for="btn_href">Button Link</label>
+        <input id="btn_href" formControlName="btn_href" />
+        <div *ngIf="slideForm.get('btn_href')?.hasError('required')">
+          <p>Button link is required</p>
+        </div>
+      </div>
+  
+      <div>
+        <label for="btn_name">Button Name</label>
+        <input id="btn_name" formControlName="btn_name" />
+        <div *ngIf="slideForm.get('btn_name')?.hasError('required')">
+          <p>Button name is required</p>
+        </div>
+      </div>
+  
+      <div>
+        <label for="status">Status</label>
+        <select id="status" formControlName="status">
+          <option [value]="true">Active</option>
+          <option [value]="false">Inactive</option>
+        </select>
+        <div *ngIf="slideForm.get('status')?.hasError('required')">
+          <p>Status is required</p>
+        </div>
+      </div>
+  
+      <button mat-button type="submit">Update Slide</button>
+    </form>
+  
+    <div *ngIf="errorMessage">
+      <p>{{ errorMessage }}</p>
+    </div>
+  </div>
+  

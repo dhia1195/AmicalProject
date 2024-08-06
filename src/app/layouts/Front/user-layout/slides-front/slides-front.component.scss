@@ -1,64 +1,21 @@
-
-
-.carousel-inner {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-  min-width: 100%;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.carousel-item img {
-  width: 100%;
-  height: auto; /* Assure que l'image garde ses proportions */
-  max-height: 100%; /* Limite la hauteur de l'image au conteneur */
-  object-fit: cover; /* Assure que l'image couvre toute la zone tout en gardant ses proportions */
-}
-
 .carousel-caption {
   position: absolute;
-  bottom: 20px; /* Réduit l'espace du bas pour plus de visibilité */
-  left: 20px; /* Réduit l'espace du côté gauche */
-  right: 20px; /* Réduit l'espace du côté droit */
-  background: rgba(0, 0, 0, 0.6); /* Augmente l'opacité du fond pour plus de contraste */
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.6);
   color: white;
-  padding: 15px; /* Réduit le padding si nécessaire */
+  padding: 15px;
   border-radius: 5px;
 }
 
 .carousel-caption h5 {
   margin: 0;
-  font-size: 2rem; /* Augmente la taille du titre */
+  font-size: 2rem;
   font-weight: bold;
 }
 
 .carousel-caption p {
   margin: 5px 0 0;
-  font-size: 1.2rem; /* Augmente la taille de la description */
-}
-
-.carousel-control-prev,
-.carousel-control-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.6); /* Augmente l'opacité des boutons de contrôle */
-  border: none;
-  color: white;
-  font-size: 2rem; /* Réduit la taille des boutons de contrôle */
-  padding: 0.5rem;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 1000;
-}
-
-.carousel-control-prev {
-  left: 10px;
-}
-
-.carousel-control-next {
-  right: 10px;
+  font-size: 1.2rem;
 }

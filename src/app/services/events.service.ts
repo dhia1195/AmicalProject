@@ -55,4 +55,21 @@ export class EventsService {
       })
     );
   }
+  public getDeletedEvents(): Observable<{ events: any[] }> {
+    return this._http.get<{ events: any[] }>(`${this.url}/getdeleted`).pipe(
+      catchError((error: any) => {
+        console.error('Error fetching deleted events:', error);
+        return throwError('Something went wrong while fetching deleted events.');
+      })
+    );
+  }
+
+  public restoreEvent(id: string): Observable<any> {
+    return this._http.put(`${this.url}/restore/${id}`, {}).pipe(
+      catchError((error: any) => {
+        console.error(`Error restoring event with ID ${id}:`, error);
+        return throwError('Something went wrong while restoring the event.');
+      })
+    );
+  }
 }

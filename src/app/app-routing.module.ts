@@ -7,6 +7,9 @@ import { ListSlidesComponent } from './pages/ui-components/list-slides/list-slid
 import { AddEventsComponent } from './pages/ui-components/add-events/add-events.component';
 import { ListEventsComponent } from './pages/ui-components/list-events/list-events.component';
 import { UpdateEventsComponent } from './pages/ui-components/update-events/update-events.component';
+import { UpdateSlidesComponent } from './pages/ui-components/update-slides/update-slides.component';
+import { DeletedSlidesComponent } from './pages/ui-components/deleted-slides/deleted-slides.component';
+import { DeletedEventsComponent } from './pages/ui-components/deleted-events/deleted-events.component';
 
 const routes: Routes = [
   {
@@ -60,6 +63,19 @@ const routes: Routes = [
       {
         path: 'updateEvents/:id',
         component: UpdateEventsComponent
+      },
+      {
+        path: 'updateSlides/:id',
+        component: UpdateSlidesComponent
+      },
+      {
+        path: 'deletedSlides',
+        component: DeletedSlidesComponent
+      },
+      {
+        path: 'deletedEvents',
+        component: DeletedEventsComponent
+
       },
 
     ],

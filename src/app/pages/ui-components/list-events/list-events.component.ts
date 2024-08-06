@@ -5,20 +5,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EventsService } from 'src/app/services/events.service';
 import { Router } from '@angular/router'; // Importez Router
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-list-events',
   templateUrl: './list-events.component.html',
   styleUrls: ['./list-events.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatTableModule, MatButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatTableModule, MatButtonModule,MatIconModule],
 })
 export class ListEventsComponent {
   displayedColumns: string[] = ['titre', 'description', 'image', 'statusEvent', 'type', 'btn_href', 'btn_name', 'created', 'updated', 'deleted', 'actions'];
   dataSource = new MatTableDataSource<any>();
   errorMessage: string = '';
 
-  constructor(private eventsService: EventsService, private router: Router) {} // Injectez Router
+  constructor(private eventsService: EventsService, private router: Router) {} 
 
   ngOnInit(): void {
     this.loadEvents();
@@ -27,7 +28,7 @@ export class ListEventsComponent {
   loadEvents(): void {
     this.eventsService.getAllEvents().subscribe({
       next: (data) => {
-        this.dataSource.data = data.events; // Assurez-vous que `data.events` est correct
+        this.dataSource.data = data.events; 
       },
       error: (error) => {
         this.errorMessage = 'Error fetching events';

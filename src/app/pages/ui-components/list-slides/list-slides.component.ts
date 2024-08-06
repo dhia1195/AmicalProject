@@ -5,11 +5,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SlidesService } from 'src/app/services/slides.service';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-list-slides',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatTableModule, MatButtonModule],
+  imports: [CommonModule, ReactiveFormsModule, MatTableModule, MatButtonModule   ,MatIconModule],
   templateUrl: './list-slides.component.html',
   styleUrls: ['./list-slides.component.scss']
 })
@@ -18,7 +20,7 @@ export class ListSlidesComponent implements OnInit {
   dataSource = new MatTableDataSource<any>();
   errorMessage: string = '';
 
-  constructor(private slidesService: SlidesService) {}
+  constructor(private slidesService: SlidesService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadSlides();
@@ -47,5 +49,8 @@ export class ListSlidesComponent implements OnInit {
         }
       });
     }
+  }
+  updateSlide(id: string): void {
+    this.router.navigate(['/updateSlides', id]);
   }
 }

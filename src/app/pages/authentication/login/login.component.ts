@@ -11,19 +11,24 @@ export class AppSideLoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   onLogin(): void {
-    const loginData = { email: this.email, password: this.password };
-    this.authService.signToken(loginData).subscribe({
+    this.userService.signin(this.email, this.password).subscribe({
       next: (response: any) => {
-        console.log('Login successful', response);
-        // Store the token or handle authentication state
-        this.router.navigate(['/dashboard']);
+        // Check if the response contains user data or a success indicator
+        if (response && response.user) {
+          console.log('Login successful', response);
+          // Store the token or handle authentication state
+          this.router.navigate(['/dashboard']);
+        } else {
+          // If no user data is returned, set the error message
+          this.errorMessage = response.message || 'Invalid email or password';
+        }
       },
       error: (error) => {
         console.error('Login error', error);
-        this.errorMessage = 'Invalid email or password';
+        this.errorMessage = 'An error occurred while logging in';
       }
     });
   }

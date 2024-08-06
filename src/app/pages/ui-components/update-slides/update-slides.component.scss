@@ -1,0 +1,74 @@
+/* update-slides.component.scss */
+
+div {
+    margin: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    border: 1px solid #ddd; /* Cadre autour du formulaire */
+    border-radius: 8px;     /* Coins arrondis pour le cadre */
+    background-color: #f9f9f9; /* Fond clair pour le formulaire */
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc; /* Cadre autour des champs de saisie */
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  input[type="file"] {
+    padding: 0;
+    border: none;
+  }
+  
+  img {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  div > div {
+    margin-top: 5px;
+    color: #d9534f; /* Red color for error messages */
+  }
+  
+  button {
+    align-self: flex-start;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

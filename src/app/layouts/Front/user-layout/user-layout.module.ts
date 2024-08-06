@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { UserLayoutComponent } from './user-layout.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AuthenticationModule } from 'src/app/pages/authentication/authentication.module';
+import { EventsfrontComponent } from './eventsfront/eventsfront.component';
 
 @NgModule({
   imports: [
@@ -23,14 +24,15 @@ import { AuthenticationModule } from 'src/app/pages/authentication/authenticatio
     ReactiveFormsModule,
     MatTableModule,
     MatButtonModule,
-    AuthenticationModule,
+    
     
   
   ],
   declarations: [
     NavbarfComponent,
     SlidesFrontComponent,
-    UserLayoutComponent
+    UserLayoutComponent,
+    EventsfrontComponent
   ]
 })
 export class UserLayoutModule {}

@@ -1,79 +1,102 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<div class="container-fluid" style="width: 100%">
+  <div class="row">
+    <div class="col-auto">
+      <!-- Bouton de redirection vers /AddEvents -->
+      <a mat-flat-button href="/AddEvents" class="text-white" style="background-color: rgb(83, 172, 83);">
+        <mat-icon>exposure_plus_1</mat-icon>
+        Add Event
+      </a>
+      
+      <!-- Bouton de redirection vers /DeletedEvents -->
+      <a mat-flat-button href="/deletedEvents" class="text-white" style="background-color: rgb(255, 87, 34);">
+        <mat-icon>restore_from_trash</mat-icon>
+        Deleted Events
+      </a>
+    </div>
+    
+    <!-- Table Angular Material -->
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      
+      <!-- Titre Column -->
+      <ng-container matColumnDef="titre">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.titre}} </td>
+      </ng-container>
 
-    <!-- Titre Column -->
-    <ng-container matColumnDef="titre">
-      <th mat-header-cell *matHeaderCellDef> Title </th>
-      <td mat-cell *matCellDef="let element"> {{element.titre}} </td>
-    </ng-container>
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
 
-    <!-- Description Column -->
-    <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Description </th>
-      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-    </ng-container>
+      <!-- Image Column -->
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef> Image </th>
+        <td mat-cell *matCellDef="let element">
+          <img [src]="element.image" alt="Image" style="width: 100px; height: auto;">
+        </td>
+      </ng-container>
 
-    <!-- Image Column -->
-    <ng-container matColumnDef="image">
-      <th mat-header-cell *matHeaderCellDef> Image </th>
-      <td mat-cell *matCellDef="let element">
-        <img [src]="element.image" alt="Image" style="width: 100px; height: auto;">
-      </td>
-    </ng-container>
+      <!-- Status Column -->
+      <ng-container matColumnDef="statusEvent">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status ? 'Active' : 'Inactive'}} </td>
+      </ng-container>
 
-    <!-- Status Column -->
-    <ng-container matColumnDef="statusEvent">
-      <th mat-header-cell *matHeaderCellDef> Status </th>
-      <td mat-cell *matCellDef="let element"> {{element.status ? 'Active' : 'Inactive'}} </td>
-    </ng-container>
+      <!-- Type Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+      </ng-container>
 
-    <!-- Type Column -->
-    <ng-container matColumnDef="type">
-      <th mat-header-cell *matHeaderCellDef> Type </th>
-      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-    </ng-container>
+      <!-- Btn_href Column -->
+      <ng-container matColumnDef="btn_href">
+        <th mat-header-cell *matHeaderCellDef> Button Link </th>
+        <td mat-cell *matCellDef="let element">
+          <a [href]="element.btn_href" target="_blank">{{element.btn_href}}</a>
+        </td>
+      </ng-container>
 
-    <!-- Btn_href Column -->
-    <ng-container matColumnDef="btn_href">
-      <th mat-header-cell *matHeaderCellDef> Button Link </th>
-      <td mat-cell *matCellDef="let element">
-        <a [href]="element.btn_href" target="_blank">{{element.btn_href}}</a>
-      </td>
-    </ng-container>
+      <!-- Btn_name Column -->
+      <ng-container matColumnDef="btn_name">
+        <th mat-header-cell *matHeaderCellDef> Button Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.btn_name}} </td>
+      </ng-container>
 
-    <!-- Btn_name Column -->
-    <ng-container matColumnDef="btn_name">
-      <th mat-header-cell *matHeaderCellDef> Button Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.btn_name}} </td>
-    </ng-container>
+      <!-- Created Column -->
+      <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef> Created </th>
+        <td mat-cell *matCellDef="let element"> {{element.created | date:'short'}} </td>
+      </ng-container>
 
-    <!-- Created Column -->
-    <ng-container matColumnDef="created">
-      <th mat-header-cell *matHeaderCellDef> Created </th>
-      <td mat-cell *matCellDef="let element"> {{element.created | date:'short'}} </td>
-    </ng-container>
+      <!-- Updated Column -->
+      <ng-container matColumnDef="updated">
+        <th mat-header-cell *matHeaderCellDef> Updated </th>
+        <td mat-cell *matCellDef="let element"> {{element.updated | date:'short'}} </td>
+      </ng-container>
 
-    <!-- Updated Column -->
-    <ng-container matColumnDef="updated">
-      <th mat-header-cell *matHeaderCellDef> Updated </th>
-      <td mat-cell *matCellDef="let element"> {{element.updated | date:'short'}} </td>
-    </ng-container>
+      <!-- Deleted Column -->
+      <ng-container matColumnDef="deleted">
+        <th mat-header-cell *matHeaderCellDef> Deleted </th>
+        <td mat-cell *matCellDef="let element"> {{element.deleted ? (element.deleted | date:'short') : 'N/A'}} </td>
+      </ng-container>
 
-    <!-- Deleted Column -->
-    <ng-container matColumnDef="deleted">
-      <th mat-header-cell *matHeaderCellDef> Deleted </th>
-      <td mat-cell *matCellDef="let element"> {{element.deleted ? (element.deleted | date:'short') : 'N/A'}} </td>
-    </ng-container>
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-button class="update-button" (click)="updateEvent(element._id)">
+            <mat-icon>edit</mat-icon> Update
+          </button>
+          <button mat-button class="delete-button" (click)="deleteEvent(element._id)">
+            <mat-icon>delete</mat-icon> Delete
+          </button>
+        </td>
+      </ng-container>
 
-    <!-- Actions Column -->
-    <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td mat-cell *matCellDef="let element">
-        <button mat-button (click)="updateEvent(element._id)">Update</button>
-        <button mat-button (click)="deleteEvent(element._id)">Delete</button>
-      </td>
-    </ng-container>
-
-    <!-- Header and Row Definitions -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+      <!-- Header and Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
