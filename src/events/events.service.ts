@@ -33,10 +33,11 @@ export class EventsService {
       return createdEvent.save();
     }
     
-async getAllEvents(): Promise<Events[]> {
-        const allEvents = await this.EventsModel.find().exec();
-        return allEvents;
-      }
+    async getAllEvents(): Promise<Events[]> {
+      const allEvents = await this.EventsModel.find({ deleted: { $eq: null } }).exec();
+      return allEvents;
+    }
+    
 
 
       async updateEvent(id: string, updateData: Partial<Events>): Promise<Events> {
@@ -54,6 +55,18 @@ async getAllEvents(): Promise<Events[]> {
       }
 async getEventById(id: string): Promise<Events> {
         return this.EventsModel.findById(id).exec();
+      }
+      async getDeletedEvents(): Promise<Events[]> {
+        return this.EventsModel.find({ deleted: { $ne: null } }).exec();
+      }
+    
+      // Nouvelle méthode pour restaurer un événement supprimé
+      async restoreEvent(id: string): Promise<Events> {
+        const restoredEvent = await this.EventsModel.findByIdAndUpdate(id, { deleted: null }, { new: true }).exec();
+        if (!restoredEvent) {
+          throw new Error('Event not found');
+        }
+        return restoredEvent;
       }
 }
 

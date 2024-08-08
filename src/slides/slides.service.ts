@@ -19,8 +19,9 @@ export class SlidesService {
     return createdSlides.save();
   }
 
+  
   async getAllSlides(): Promise<Slides[]> {
-    return this.SlidesModel.find().exec();
+    return this.SlidesModel.find({ deleted: { $eq: null } }).exec();
   }
 
   async updateSlide(id: string, updateData: Partial<Slides>): Promise<Slides> {
@@ -38,5 +39,16 @@ export class SlidesService {
 
   async getSlideById(id: string): Promise<Slides> {
     return this.SlidesModel.findById(id).exec();
+  }
+  async getDeletedSlides(): Promise<Slides[]> {
+    return this.SlidesModel.find({ deleted: { $ne: null } }).exec();
+  }
+
+  async restoreSlide(id: string): Promise<Slides> {
+    const restoredSlide = await this.SlidesModel.findByIdAndUpdate(id, { deleted: null }, { new: true }).exec();
+    if (!restoredSlide) {
+      throw new Error('Slide not found');
+    }
+    return restoredSlide;
   }
 }

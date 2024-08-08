@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { Events, TypeF } from './events.schema';
 import { EventsService } from './events.service';
 
@@ -54,5 +54,13 @@ async updateEvent(@Param('id') id:string, @Body() updateData: Partial<Events>){
   async getEventById(@Param('id') id: string) {
     return this.eventsService.getEventById(id);
   }
+  @Get('getdeleted')
+  async getDeletedEvents(): Promise<Events[]> {
+    return this.eventsService.getDeletedEvents();
+  }
 
+  @Put('restore/:id')
+  async restoreEvent(@Param('id') id: string): Promise<Events> {
+    return this.eventsService.restoreEvent(id);
+  }
 }

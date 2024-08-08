@@ -2,7 +2,7 @@
 import {  Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
 import { Events } from 'src/events/events.schema';
-import { User } from 'src/user/entities/user.entity';
+import { User } from 'src/user/user.schema';
 
 export type ReservationsDocument = Reservations & Document;
 
@@ -28,12 +28,12 @@ export class Reservations{
   post: string;
   @Prop({ required: true})
   numtel: number;
- 
+  @Prop({ required: true})
+  email: string;
   @Prop({ type: Types.ObjectId, ref: 'Events' })
   event: Events;
 
-  @Prop({ type: Types.ObjectId, ref: 'User' })
-  user: User;
+ 
 
 
 

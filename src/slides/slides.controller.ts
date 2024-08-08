@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { Slides } from './slides.schema';
 import { SlidesService } from './slides.service';
 
@@ -42,5 +42,16 @@ async updateSlide(@Param('id') id:string, @Body() updateData: Partial<Slides>){
   async getSlideById(@Param('id') id: string) {
     return this.slidesService.getSlideById(id);
   }
+  @Get('getdeleted')
+  async getDeletedSlides() {
+    const deletedSlides = await this.slidesService.getDeletedSlides();
+    return { slides: deletedSlides };
+  }
 
+  // Nouvelle route pour restaurer une diapositive supprimée
+  @Put('restore/:id')
+  async restoreSlide(@Param('id') id: string) {
+    const restoredSlide = await this.slidesService.restoreSlide(id);
+    return { slide: restoredSlide };
+  }
 }
