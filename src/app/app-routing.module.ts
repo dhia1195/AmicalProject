@@ -10,6 +10,7 @@ import { UpdateEventsComponent } from './pages/ui-components/update-events/updat
 import { UpdateSlidesComponent } from './pages/ui-components/update-slides/update-slides.component';
 import { DeletedSlidesComponent } from './pages/ui-components/deleted-slides/deleted-slides.component';
 import { DeletedEventsComponent } from './pages/ui-components/deleted-events/deleted-events.component';
+import { ListReservationComponent } from './pages/ui-components/list-reservation/list-reservation.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,12 @@ const routes: Routes = [
         component: DeletedEventsComponent
 
       },
+      {
+        path: 'ListReservations',
+        component: ListReservationComponent
+
+      },
+
 
     ],
   },

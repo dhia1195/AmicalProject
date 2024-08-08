@@ -1,23 +1,24 @@
+<H1>Events</H1>
 <div class="container-fluid" style="width: 100%">
   <div class="row">
     <div class="col-auto">
-      <!-- Bouton de redirection vers /AddEvents -->
+      <!-- Button to navigate to /AddEvents -->
       <a mat-flat-button href="/AddEvents" class="text-white" style="background-color: rgb(83, 172, 83);">
         <mat-icon>exposure_plus_1</mat-icon>
         Add Event
       </a>
       
-      <!-- Bouton de redirection vers /DeletedEvents -->
+      <!-- Button to navigate to /deletedEvents -->
       <a mat-flat-button href="/deletedEvents" class="text-white" style="background-color: rgb(255, 87, 34);">
         <mat-icon>restore_from_trash</mat-icon>
         Deleted Events
       </a>
     </div>
     
-    <!-- Table Angular Material -->
+    <!-- Angular Material Table -->
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       
-      <!-- Titre Column -->
+      <!-- Title Column -->
       <ng-container matColumnDef="titre">
         <th mat-header-cell *matHeaderCellDef> Title </th>
         <td mat-cell *matCellDef="let element"> {{element.titre}} </td>
@@ -49,7 +50,7 @@
         <td mat-cell *matCellDef="let element"> {{element.type}} </td>
       </ng-container>
 
-      <!-- Btn_href Column -->
+      <!-- Button Link Column -->
       <ng-container matColumnDef="btn_href">
         <th mat-header-cell *matHeaderCellDef> Button Link </th>
         <td mat-cell *matCellDef="let element">
@@ -57,7 +58,7 @@
         </td>
       </ng-container>
 
-      <!-- Btn_name Column -->
+      <!-- Button Name Column -->
       <ng-container matColumnDef="btn_name">
         <th mat-header-cell *matHeaderCellDef> Button Name </th>
         <td mat-cell *matCellDef="let element"> {{element.btn_name}} </td>
@@ -79,6 +80,13 @@
       <ng-container matColumnDef="deleted">
         <th mat-header-cell *matHeaderCellDef> Deleted </th>
         <td mat-cell *matCellDef="let element"> {{element.deleted ? (element.deleted | date:'short') : 'N/A'}} </td>
+      </ng-container>
+
+      <!-- Reservations Column -->
+      <ng-container matColumnDef="reservations">
+        <th mat-header-cell *matHeaderCellDef> Reservations </th>
+        <td mat-cell *matCellDef="let element"> <p>{{ element.reservations | number }}</p>
+        </td>
       </ng-container>
 
       <!-- Actions Column -->

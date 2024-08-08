@@ -1,0 +1,24 @@
+<div class="event-details-container" *ngIf="event; else errorTemplate">
+    <mat-card class="event-card">
+      <img mat-card-image [src]="event.image" alt="{{ event.title }}" class="event-image" />
+      <mat-card-content>
+        <div class="event-info">
+          <mat-card-title class="event-title">{{ event.title }}</mat-card-title>
+          <mat-card-subtitle class="event-subtitle">{{ event.type }} - {{ event.statusEvent }}</mat-card-subtitle>
+          <p class="event-description">{{ event.description }}</p>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <ng-template #errorTemplate>
+    <mat-card class="error-card">
+      <mat-card-header>
+        <mat-card-title>Error</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p *ngIf="errorMessage">{{ errorMessage }}</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+  

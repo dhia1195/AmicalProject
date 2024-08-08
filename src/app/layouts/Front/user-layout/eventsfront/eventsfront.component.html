@@ -1,1 +1,18 @@
-<p>eventsfront works!</p>
+<div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+<div class="events-container">
+  <mat-card *ngFor="let event of dataSource.data" class="event-card">
+    <img mat-card-image [src]="event.image" alt="Event image">
+    <mat-card-content>
+      <h2>{{ event.titre }}</h2>
+      <p>{{ event.description }}</p>
+      <p>Status: {{ event.statusEvent }}</p>
+      <p>Type: {{ event.type }}</p>
+      <a [href]="event.btn_href" target="_blank">{{ event.btn_name }}</a>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button class="custom-reserve-button" (click)="reserveEvent(event._id)">Reserve</button>
+      <button mat-button class="custom-view-details-button" (click)="viewEventDetails(event._id)">View Details</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

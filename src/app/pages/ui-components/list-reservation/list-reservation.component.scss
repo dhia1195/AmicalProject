@@ -1,0 +1,111 @@
+/* List Reservation Component Styles */
+
+.table-container {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  button {
+    background-color: #ff3b3b;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  button:hover {
+    background-color: #e60000;
+  }
+  
+  .no-reservations {
+    text-align: center;
+    font-size: 18px;
+    color: #555;
+  }
+  /* list-reservation.component.scss */
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.event-image {
+    max-width: 100px;
+    max-height: 100px;
+    cursor: pointer;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    z-index: 1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    white-space: nowrap;
+}
+
+.tooltip-container:hover .tooltip {
+    display: block;
+}
+/* list-reservation.component.scss */
+
+.popup-container {
+    position: relative;
+    display: inline-block; /* Allows popup to be positioned relative to the image */
+  }
+  
+  .event-image {
+    display: block;
+    width: 100px; /* Adjust as needed */
+    height: auto;
+    cursor: pointer; /* Optional: to indicate the image is interactive */
+  }
+  
+  .popup {
+    position: absolute;
+    top: 100%; /* Position below the image */
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px; /* Adjust width as needed */
+    z-index: 10; /* Ensure popup is above other elements */
+    display: none; /* Hide by default */
+  }
+  
+  .popup-container:hover .popup {
+    display: block; /* Show popup on hover */
+  }
+  

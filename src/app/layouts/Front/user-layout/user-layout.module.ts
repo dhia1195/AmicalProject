@@ -14,6 +14,10 @@ import { UserLayoutComponent } from './user-layout.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AuthenticationModule } from 'src/app/pages/authentication/authentication.module';
 import { EventsfrontComponent } from './eventsfront/eventsfront.component';
+import { AddreservationComponent } from './addreservation/addreservation.component';
+import { MatCardModule } from '@angular/material/card';
+import { EventDetailsComponent } from './event-details/event-details.component';
+import { MaterialModule } from 'src/app/material.module';
 
 @NgModule({
   imports: [
@@ -24,7 +28,9 @@ import { EventsfrontComponent } from './eventsfront/eventsfront.component';
     ReactiveFormsModule,
     MatTableModule,
     MatButtonModule,
-    
+    MatCardModule,
+    MaterialModule,
+
     
   
   ],
@@ -32,7 +38,11 @@ import { EventsfrontComponent } from './eventsfront/eventsfront.component';
     NavbarfComponent,
     SlidesFrontComponent,
     UserLayoutComponent,
-    EventsfrontComponent
+    EventsfrontComponent,
+   
+    AddreservationComponent,
+    EventDetailsComponent,
+    
   ]
 })
 export class UserLayoutModule {}

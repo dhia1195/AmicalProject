@@ -1,0 +1,58 @@
+.event-details-container {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+  }
+  
+  .event-card {
+    max-width: 800px; /* Limit the card width */
+    margin: 16px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a 3D effect */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+  }
+  
+  .event-image {
+    width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    object-fit: cover; /* Ensure the image covers the container without distortion */
+  }
+  
+  .event-info {
+    padding: 16px;
+  }
+  
+  .event-title {
+    font-size: 1.75rem; /* Larger title font size */
+    font-weight: 600; /* Semi-bold title */
+    margin: 0 0 8px; /* Margin below title */
+  }
+  
+  .event-subtitle {
+    font-size: 1rem; /* Subtitle font size */
+    color: rgba(0, 0, 0, 0.6); /* Subtle color */
+    margin: 0 0 16px; /* Margin below subtitle */
+  }
+  
+  .event-description {
+    font-size: 1rem; /* Description font size */
+    line-height: 1.6; /* Improved readability */
+  }
+  
+  .error-card {
+    max-width: 600px; /* Limit the card width */
+    margin: 16px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for a 3D effect */
+    background-color: #f8d7da; /* Light red background */
+  }
+  
+  .error-card mat-card-title {
+    color: #721c24; /* Dark red text for the title */
+  }
+  
+  .error-card p {
+    color: #721c24; /* Dark red text for error messages */
+  }
+  
