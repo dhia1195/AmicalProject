@@ -1,5 +1,41 @@
-h1 {
-    text-align: center; /* Center align the text */
-    
+// Container for the card
+.card-animated {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth transition for transform and shadow
+    border: 1px solid #ddd; // Subtle border
+    border-radius: 8px; // Rounded corners
+    overflow: hidden; // Ensure content stays within the card
+  
+    &:hover {
+      transform: translateY(-10px); // Lift the card on hover
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); // Shadow for depth
+    }
+  }
+  
+  // Card body styling
+  .card-body {
+    padding: 1rem; // Padding inside the card
+  }
+  
+  // Title styling
+  .card-title {
+    font-size: 1.25rem; // Size of the title
+    font-weight: bold; // Bold title
+  }
+  
+  // Text styling
+  .card-text {
+    font-size: 0.875rem; // Size of the text
+    color: #555; // Darker text color
+  }
+  
+  // Button styling
+  .btn-sm {
+    font-size: 0.75rem; // Smaller font size for buttons
+    padding: 0.25rem 0.5rem; // Smaller padding
+  }
+  
+  // Adjust iframe height
+  iframe {
+    height: 300px; // Adjusted iframe height for better fit
   }
   

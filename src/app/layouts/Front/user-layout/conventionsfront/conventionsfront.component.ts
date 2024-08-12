@@ -23,7 +23,10 @@ export class ConventionsfrontComponent {
   loadConventions(): void {
     this.conventionsService.getAllConventions().subscribe({
       next: (data) => {
-        this.dataSource.data = data.conventions; 
+        this.dataSource.data = data.conventions.map(convention => ({
+          ...convention,
+          sanitizedImage: this.getSanitizedUrl(convention.image) // Cache sanitized URL
+        }));
       },
       error: (error) => {
         this.errorMessage = 'Error fetching conventions';
@@ -31,9 +34,14 @@ export class ConventionsfrontComponent {
       }
     });
   }
+
   getSanitizedUrl(base64Data: string): SafeResourceUrl {
     const base64Prefix = 'data:application/pdf;base64,';
     const pdfData = base64Data.startsWith(base64Prefix) ? base64Data : base64Prefix + base64Data;
     return this.sanitizer.bypassSecurityTrustResourceUrl(pdfData);
+  }
+
+  trackById(index: number, item: any): string {
+    return item._id; // Use a unique identifier for tracking
   }
 }

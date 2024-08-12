@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SlidesService } from 'src/app/services/slides.service';
 
@@ -7,29 +7,24 @@ import { SlidesService } from 'src/app/services/slides.service';
   templateUrl: './slides-front.component.html',
   styleUrls: ['./slides-front.component.scss']
 })
-export class SlidesFrontComponent implements OnInit, AfterViewInit {
+export class SlidesFrontComponent implements OnInit {
   displayedColumns: string[] = ['titre', 'description', 'image', 'status'];
   dataSource = new MatTableDataSource<any>();
   errorMessage: string = '';
   currentIndex = 0;
   autoSlideInterval: any;
 
-  @ViewChild('carouselInner') carouselInner!: ElementRef;
-
   constructor(private slidesService: SlidesService) {}
 
   ngOnInit(): void {
     this.loadSlides();
-  }
-
-  ngAfterViewInit(): void {
     this.startAutoSlide();
   }
 
   loadSlides(): void {
     this.slidesService.getAllSlides().subscribe({
       next: (data) => {
-        this.dataSource.data = data.slides; // Assurez-vous que `data.slides` est correct
+        this.dataSource.data = data.slides; // Ensure `data.slides` is correct
       },
       error: (error) => {
         this.errorMessage = 'Error fetching slides';
@@ -55,8 +50,7 @@ export class SlidesFrontComponent implements OnInit, AfterViewInit {
   }
 
   updateSlidePosition() {
-    const slidesContainer = this.carouselInner.nativeElement as HTMLElement;
-    slidesContainer.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+    // No need to manually update carousel position
   }
 
   ngOnDestroy() {

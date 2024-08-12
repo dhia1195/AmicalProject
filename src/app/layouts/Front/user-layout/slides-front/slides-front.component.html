@@ -1,7 +1,8 @@
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+<!-- Carousel -->
+<div id="carouselExampleControls" class="carousel slide">
   <div class="carousel-inner">
-    <div *ngFor="let slide of dataSource.data; let i = index" 
-         class="carousel-item" 
+    <div *ngFor="let slide of dataSource.data; let i = index"
+         class="carousel-item"
          [class.active]="i === currentIndex">
       <img [src]="slide.image" class="d-block w-100" alt="Slide">
       <div class="carousel-caption">
@@ -10,14 +11,16 @@
       </div>
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+  <a class="carousel-control-prev" (click)="prevSlide()" role="button">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+  <a class="carousel-control-next" (click)="nextSlide()" role="button">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
 </div>
+
+<!-- Other components -->
 <app-eventsfront></app-eventsfront>
 <app-conventionsfront></app-conventionsfront>
