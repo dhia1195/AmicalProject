@@ -24,7 +24,7 @@ export class Conventions{
   date: Date;
 
   @Prop({ required: true})
-  pdf: string;
+  image: string;
 
   @Prop({ type: String, enum: Object.values(TypeC) })
   type: TypeC;
@@ -37,7 +37,6 @@ export class Conventions{
 
   @Prop({ default: null })
   deleted: Date;
-
 
   
 }

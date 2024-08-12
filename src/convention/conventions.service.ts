@@ -9,21 +9,22 @@ export class ConventionsService {constructor(@InjectModel(Conventions.name) priv
 
 async ajouterConvention(
   titre: string,
-   status: string,
-   date:Date, 
-   pdf:string,
-    type:TypeC         ):
-    Promise<Conventions> {
-        const createdConventions = new this.ConventionsModel({
-            titre,
-            status,
-            date,
-            pdf,
-            type,
-        });
-    
-        return createdConventions.save();
-    }
+  status: boolean,
+  date: Date,
+  type: TypeC,
+  image: string // Make pdf optional
+): Promise<Conventions> {
+  const createdConventions = new this.ConventionsModel({
+    titre,
+    status,
+    date,
+    image, // pdf is optional here
+    type,
+  });
+
+  return createdConventions.save();
+}
+
     async getAllConventions(): Promise<Conventions[]> {
       const allConventions = await this.ConventionsModel.find({ deleted: { $eq: null } }).exec();
       return allConventions;
@@ -55,7 +56,12 @@ async getConventionById(id: string): Promise<Conventions> {
         }
         return restoredConvention;
       }
+      async deleteConventionPermanently(id: string): Promise<void> {
+        const result = await this.ConventionsModel.findByIdAndDelete(id).exec();
+        if (!result) {
+          throw new Error('Convention not found or already deleted permanently');
+        }
+      }
 }
-
 
 

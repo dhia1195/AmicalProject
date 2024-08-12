@@ -1,22 +1,25 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post, Put } from '@nestjs/common';
 import { Conventions, TypeC } from './conventions.schema';
 import { ConventionsService } from './conventions.service';
 
+
 @Controller('conventions')
-export class ConventionsController {constructor(private readonly conventionsService: ConventionsService) {}
+export class ConventionsController {
+  constructor(private readonly conventionsService: ConventionsService) {}
 
-@Post('ajouter')
-async ajouterSprint(
+  @Post('ajouter')
+  async ajouterConvention(
     @Body('titre') titre: string,
-    @Body('status') status: string,
-    @Body('date') date: Date,
-    @Body('pdf') pdf: string,
-    @Body('type') type: TypeC,
+    @Body('status') status: boolean,
+    @Body('image') image: string,
+    @Body('date') date: Date, // Accept date as a Date type
+    @Body('type') type: TypeC
+  ) {
+    // No need to convert date, as it's expected to be a Date object already
+    const newConvention = await this.conventionsService.ajouterConvention(titre, status, date, type, image);
+    return { conventions: newConvention };
+  }
 
-   
-) {
-    const nouveauConvention = await this.conventionsService.ajouterConvention(titre, status,date,pdf,type);
-    return { slider: nouveauConvention };}
 
 @Get('getall')
 async getAllConventions(){
@@ -27,7 +30,7 @@ async getAllConventions(){
 async updateConvention(@Param('id') id:string, @Body() updateData: Partial<Conventions>){
 
     const updatedConvention = await this.conventionsService.updateConvention(id,updateData);
-    return{Conventions : updatedConvention};
+    return{conventions : updatedConvention};
 }
 
 @Delete(':id')
@@ -47,5 +50,9 @@ async updateConvention(@Param('id') id:string, @Body() updateData: Partial<Conve
   @Put('restore/:id')
   async restoreConvention(@Param('id') id: string): Promise<Conventions> {
     return this.conventionsService.restoreConvention(id);
+  }
+  @Delete(':id/permanent')
+  async deleteConventionPermanently(@Param('id') id: string): Promise<void> {
+    return this.conventionsService.deleteConventionPermanently(id);
   }
 }

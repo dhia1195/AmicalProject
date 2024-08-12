@@ -54,4 +54,8 @@ async updateSlide(@Param('id') id:string, @Body() updateData: Partial<Slides>){
     const restoredSlide = await this.slidesService.restoreSlide(id);
     return { slide: restoredSlide };
   }
+  @Delete(':id/permanent')
+  async deleteSlidePermanently(@Param('id') id: string): Promise<void> {
+    return this.slidesService.deleteSlidePermanently(id);
+  }
 }

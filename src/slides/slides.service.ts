@@ -51,4 +51,10 @@ export class SlidesService {
     }
     return restoredSlide;
   }
+  async deleteSlidePermanently(id: string): Promise<void> {
+    const result = await this.SlidesModel.findByIdAndDelete(id).exec();
+    if (!result) {
+      throw new Error('Slide not found or already deleted permanently');
+    }
+  }
 }
