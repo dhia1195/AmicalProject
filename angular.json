@@ -10,7 +10,6 @@
           "style": "scss"
         }
       },
-      
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -29,9 +28,13 @@
               "src/styles.scss",
               "src/assets/scss/style.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/pdfmake/build/pdfmake.js",
+              "node_modules/pdfmake/build/vfs_fonts.js"
+            ],
             "allowedCommonJsDependencies": [
-              "apexcharts"
+              "apexcharts",
+              "pdfmake" 
             ]
           },
           "configurations": {

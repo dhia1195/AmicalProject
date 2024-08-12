@@ -1,57 +1,62 @@
-<!-- list-reservation.component.html -->
-
+<h1>Reservations</h1>
 <div *ngIf="reservations.length === 0">
-    No reservations found.
-  </div>
-  
-  <table *ngIf="reservations.length > 0">
-    <thead>
-      <tr>
-        <th>Matricule</th>
-        <th>Date</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Post</th>
-        <th>Numéro de téléphone</th>
-        <th>Email</th>
-        <th>Event Image</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let reservation of reservations">
-        <td>{{ reservation.matricule }}</td>
-        <td>{{ reservation.date | date: 'short' }}</td>
-        <td>{{ reservation.nom }}</td>
-        <td>{{ reservation.prenom }}</td>
-        <td>{{ reservation.post }}</td>
-        <td>{{ reservation.numtel }}</td>
-        <td>{{ reservation.email }}</td>
-        <td>
-          <div class="popup-container">
-            <img
-              *ngIf="reservation.event?.image"
-              [src]="reservation.event.image"
-              alt="Event Image"
-              class="event-image"
-              (mouseover)="showPopup(reservation.event)"
-              (mouseout)="hidePopup()"
-            />
-            <div
-              class="popup"
-              *ngIf="currentEvent === reservation.event"
-            >
-              <h3>{{ reservation.event?.titre }}</h3>
-              <p>{{ reservation.event?.description }}</p>
-              <p>Date: {{ reservation.event?.dateD | date: 'shortDate' }} - {{ reservation.event?.dateF | date: 'shortDate' }}</p>
-              <a [href]="reservation.event?.btn_href" target="_blank">{{ reservation.event?.btn_name }}</a>
-            </div>
+  No reservations found.
+</div>
+
+<table *ngIf="reservations.length > 0">
+  <thead>
+    <tr>
+      <th>Matricule</th>
+      <th>Date</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Post</th>
+      <th>Numéro de téléphone</th>
+      <th>Email</th>
+      <th>Event Image</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let reservation of paginatedReservations">
+      <td>{{ reservation.matricule }}</td>
+      <td>{{ reservation.date | date: 'short' }}</td>
+      <td>{{ reservation.nom }}</td>
+      <td>{{ reservation.prenom }}</td>
+      <td>{{ reservation.post }}</td>
+      <td>{{ reservation.numtel }}</td>
+      <td>{{ reservation.email }}</td>
+      <td>
+        <div class="popup-container">
+          <img
+            *ngIf="reservation.event?.image"
+            [src]="reservation.event.image"
+            alt="Event Image"
+            class="event-image"
+            (mouseover)="showPopup(reservation.event)"
+            (mouseout)="hidePopup()"
+          />
+          <div
+            class="popup"
+            *ngIf="currentEvent === reservation.event"
+          >
+            <h3>{{ reservation.event?.titre }}</h3>
+            <p>{{ reservation.event?.description }}</p>
+            <p>Date: {{ reservation.event?.dateD | date: 'shortDate' }} - {{ reservation.event?.dateF | date: 'shortDate' }}</p>
+            <a [href]="reservation.event?.btn_href" target="_blank">{{ reservation.event?.btn_name }}</a>
           </div>
-        </td>
-        <td>
-          <button (click)="deleteReservation(reservation._id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
+        </div>
+      </td>
+      <td>
+        <button (click)="deleteReservation(reservation._id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Pagination Controls -->
+<div class="pagination-controls">
+  <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">Previous</button>
+  <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
+  <button (click)="onPageChange(currentPage + 1)" [disabled]="(currentPage + 1) * pageSize >= reservations.length">Next</button>
+</div>

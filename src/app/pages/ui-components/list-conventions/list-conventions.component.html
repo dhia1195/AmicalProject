@@ -1,0 +1,68 @@
+<h1>Conventions</h1>
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+
+<div *ngIf="conventions.length > 0; else noData">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-auto">
+        <!-- Button to navigate to /addConventions -->
+        <a mat-flat-button href="/addConventions" class="text-white" style="background-color: rgb(83, 172, 83);">
+          <mat-icon>exposure_plus_1</mat-icon>
+          Add Convention
+        </a>
+
+        <!-- Button to navigate to /deletedConventions -->
+        <a mat-flat-button href="/deletedConventions" class="text-white" style="background-color: rgb(255, 87, 34);">
+          <mat-icon>restore_from_trash</mat-icon>
+          Deleted Conventions
+        </a>
+      </div>
+    </div>
+
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>Titre</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>PDF</th>
+          <th>Type</th>
+          <th>Actions</th>
+          <th>Generate PDF</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let convention of conventions">
+          <td>{{ convention.titre }}</td>
+          <td>{{ convention.statusConvention }}</td>
+          <td>{{ convention.date | date:'shortDate' }}</td>
+          <td>
+            <iframe *ngIf="convention.image"
+                    [src]="getSanitizedUrl(convention.image)"
+                    style="width: 100%; height: 500px; border: none;">
+            </iframe>
+          </td>
+          
+          
+          <td>{{ convention.type }}</td>
+          <td>
+            <button (click)="deleteConvention(convention._id)" class="btn btn-danger btn-sm">
+              Delete
+            </button>
+          </td>
+          <td>
+            <button (click)="generatePdf(convention)" class="btn btn-primary btn-sm">
+              Generate PDF
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="alert alert-info">No conventions found.</div>
+</ng-template>

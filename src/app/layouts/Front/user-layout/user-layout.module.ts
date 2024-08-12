@@ -18,6 +18,7 @@ import { AddreservationComponent } from './addreservation/addreservation.compone
 import { MatCardModule } from '@angular/material/card';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { MaterialModule } from 'src/app/material.module';
+import { ConventionsfrontComponent } from './conventionsfront/conventionsfront.component';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { MaterialModule } from 'src/app/material.module';
    
     AddreservationComponent,
     EventDetailsComponent,
+    ConventionsfrontComponent,
     
   ]
 })

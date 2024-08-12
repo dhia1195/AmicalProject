@@ -11,6 +11,9 @@ import { UpdateSlidesComponent } from './pages/ui-components/update-slides/updat
 import { DeletedSlidesComponent } from './pages/ui-components/deleted-slides/deleted-slides.component';
 import { DeletedEventsComponent } from './pages/ui-components/deleted-events/deleted-events.component';
 import { ListReservationComponent } from './pages/ui-components/list-reservation/list-reservation.component';
+import { AddConventionsComponent } from './pages/ui-components/add-conventions/add-conventions.component';
+import { ListConventionsComponent } from './pages/ui-components/list-conventions/list-conventions.component';
+import { DeletedConventionsComponent } from './pages/ui-components/deleted-conventions/deleted-conventions.component';
 
 const routes: Routes = [
   {
@@ -83,6 +86,22 @@ const routes: Routes = [
         component: ListReservationComponent
 
       },
+      {
+        path: 'addConventions',
+        component: AddConventionsComponent
+
+      },
+      {
+        path: 'ListConventions',
+        component: ListConventionsComponent,
+
+      },
+      {
+        path: 'deletedConventions',
+        component: DeletedConventionsComponent,
+
+      },
+
 
 
     ],

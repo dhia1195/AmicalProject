@@ -24,6 +24,11 @@ export const navItems: NavItem[] = [
     iconName: 'layout-navbar-expand',
     route: '/ListReservations',
   },
+  {
+    displayName: 'Conventions',
+    iconName: 'poker-chip',
+    route: '/ListConventions',
+  },
   
  
   {
