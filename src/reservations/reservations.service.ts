@@ -10,10 +10,11 @@ export class ReservationsService {constructor(@InjectModel(Reservations.name) pr
 ){}
 
 
-async ajouterReservation(matricule: string, date: Date,nom:string,prenom:string,post:string,numtel:number,email:string): Promise<Reservations> {
+async ajouterReservation(matricule: string, dateD: Date,dateF: Date,nom:string,prenom:string,post:string,numtel:number,email:string): Promise<Reservations> {
         const createdReservations = new this.ReservationsModel({
             matricule,
-            date,
+            dateD,
+            dateF,
             nom,
             prenom,
             post,
@@ -60,6 +61,17 @@ async getReservationById(id: string): Promise<Reservations> {
         const eventObjectId = new Types.ObjectId(eventId); // Ensure it's an ObjectId
         return this.ReservationsModel.countDocuments({ event: eventObjectId }).exec();
 }
+async getReservationsByEventId(eventId: string): Promise<Reservations[]> {
+  const objectId = new Types.ObjectId(eventId);
+  console.log('Converted ObjectId:', objectId);
+  const reservations = await this.ReservationsModel.find({ event: objectId }).exec();
+  console.log('Reservations found:', reservations);
+  if (!reservations || reservations.length === 0) {
+    throw new NotFoundException('No reservations found for this event');
+  }
+  return reservations;
+}
+
 
 
 }

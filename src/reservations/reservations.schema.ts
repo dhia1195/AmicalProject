@@ -18,8 +18,9 @@ export class Reservations{
   
 
   @Prop({ required: true})
-  date: Date;
-
+  dateD: Date;
+  @Prop({ required: true})
+  dateF: Date;
   @Prop({ required: true})
   nom: string;
   @Prop({ required: true})

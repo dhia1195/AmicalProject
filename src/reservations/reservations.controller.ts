@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post } from '@nestjs/common';
 import { Reservations } from './reservations.schema';
 import { ReservationsService } from './reservations.service';
 import { InjectModel } from '@nestjs/mongoose';
@@ -12,7 +12,8 @@ export class ReservationsController {constructor(private readonly reservationsSe
 @Post('ajouter')
 async ajouterSprint(
     @Body('matricule') matricule: string,
-    @Body('date') date: Date,
+    @Body('dateD') dateD: Date,
+    @Body('dateF') dateF: Date,
     @Body('nom') nom: string,
     @Body('prenom') prenom: string,
     @Body('post') post: string,
@@ -24,7 +25,7 @@ async ajouterSprint(
 
    
 ) {
-    const nouveauReservation = await this.reservationsService.ajouterReservation(matricule,date,nom,prenom,post,numtel,email);
+    const nouveauReservation = await this.reservationsService.ajouterReservation(matricule,dateD,dateF,nom,prenom,post,numtel,email);
     return { reservation: nouveauReservation };}
 
 @Get('getall')
@@ -61,4 +62,10 @@ async reserveEvent(@Body() reservationData: Partial<Reservations>) {
     const count = await this.reservationsService.countReservationsForEvent(eventId);
     return { count };
   }
+  @Get('by-event/:eventId')
+  async getReservationsByEventId(@Param('eventId') eventId: string): Promise<Reservations[]> {
+    return this.reservationsService.getReservationsByEventId(eventId);
+  }
+  
+
 }
