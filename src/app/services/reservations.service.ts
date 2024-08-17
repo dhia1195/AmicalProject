@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,4 +35,13 @@ export class ReservationsService {
   countReservationsForEvent(eventId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/count-reservations/${eventId}`);
   }
+  getReservationsByEventId(eventId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/by-event/${eventId}`).pipe(
+      catchError(error => {
+        console.error('Error fetching reservations:', error);
+        throw error; // Rethrow or handle the error appropriately
+      })
+    );
+  }
+  
 }

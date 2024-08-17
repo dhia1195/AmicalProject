@@ -82,12 +82,18 @@
         <td mat-cell *matCellDef="let element"> {{element.deleted ? (element.deleted | date:'short') : 'N/A'}} </td>
       </ng-container>
 
-      <!-- Reservations Column -->
       <ng-container matColumnDef="reservations">
         <th mat-header-cell *matHeaderCellDef> Reservations </th>
-        <td mat-cell *matCellDef="let element"> <p>{{ element.reservations | number }}</p>
+        <td mat-cell *matCellDef="let element">
+          <button mat-icon-button (click)="navigateToReservations(element._id)" aria-label="Reservations count">
+            <mat-icon>badge</mat-icon>
+            <span matBadge="{{ element.reservations }}" matBadgeColor="primary" matBadgeOverlap="false"></span>
+          </button>
         </td>
       </ng-container>
+      
+      
+      
 
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">

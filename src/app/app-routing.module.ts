@@ -14,6 +14,7 @@ import { ListReservationComponent } from './pages/ui-components/list-reservation
 import { AddConventionsComponent } from './pages/ui-components/add-conventions/add-conventions.component';
 import { ListConventionsComponent } from './pages/ui-components/list-conventions/list-conventions.component';
 import { DeletedConventionsComponent } from './pages/ui-components/deleted-conventions/deleted-conventions.component';
+import { ReservationsByEventComponent } from './pages/ui-components/reservations-by-event/reservations-by-event.component';
 
 const routes: Routes = [
   {
@@ -100,7 +101,8 @@ const routes: Routes = [
         path: 'deletedConventions',
         component: DeletedConventionsComponent,
 
-      },
+      },  { path: 'reservations/event/:id', component: ReservationsByEventComponent },
+
 
 
 

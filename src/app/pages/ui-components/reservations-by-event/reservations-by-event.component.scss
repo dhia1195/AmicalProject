@@ -1,0 +1,54 @@
+/* Container for reservation cards */
+.cards-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px; /* Adjust spacing between cards */
+    justify-content: center; /* Center cards horizontally */
+  }
+  
+  /* Style for each reservation card */
+  .reservation-card {
+    width: 300px; /* Adjust width as needed */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensure rounded corners are applied to the content */
+    transition: transform 0.2s ease-in-out; /* Smooth scale effect on hover */
+  }
+  
+  .reservation-card:hover {
+    transform: scale(1.02); /* Slightly scale up the card on hover */
+  }
+  
+  /* Style for header of the reservation card */
+  mat-card-header {
+    background-color: #f5f5f5; /* Light background color */
+    padding: 8px 16px; /* Adjust padding for better spacing */
+  }
+  
+  mat-card-title {
+    font-size: 1.2em; /* Slightly larger title font size */
+    font-weight: bold;
+  }
+  
+  /* Style for no reservations message card */
+  .no-reservations-card {
+    width: 100%; /* Full width for the no reservations card */
+    max-width: 600px; /* Maximum width for readability */
+    margin: 0 auto; /* Center align */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+    text-align: center; /* Center align text */
+    padding: 16px; /* Padding for better spacing */
+  }
+  .reservations-title {
+    font-size: 2em; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    color: #333; /* Dark color for better readability */
+    text-align: center; /* Center align the text */
+    margin-bottom: 20px; /* Space below the heading */
+    border-bottom: 2px solid #007bff; /* Bottom border with color */
+    padding-bottom: 10px; /* Space between text and border */
+    font-family: 'Roboto', sans-serif; /* Font family for a modern look */
+    text-transform: uppercase; /* Uppercase text */
+  }
+  

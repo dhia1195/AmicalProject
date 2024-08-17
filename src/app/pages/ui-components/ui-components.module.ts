@@ -13,6 +13,7 @@ import { UiComponentsRoutes } from './ui-components.routing';
 // ui components
 import { AppMenuComponent } from './menu/menu.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ReservationsByEventComponent } from './reservations-by-event/reservations-by-event.component';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   ],
   declarations: [
     AppMenuComponent,
+    ReservationsByEventComponent,
 
  
 

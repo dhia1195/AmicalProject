@@ -4,17 +4,18 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EventsService } from 'src/app/services/events.service';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { ReservationsService } from 'src/app/services/reservations.service';
-import { map } from 'rxjs/operators'; // Make sure to import map operator
+import { map } from 'rxjs/operators';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-list-events',
   templateUrl: './list-events.component.html',
   styleUrls: ['./list-events.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatTableModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, ReactiveFormsModule, MatTableModule, MatButtonModule, MatIconModule, MatBadgeModule,],
 })
 export class ListEventsComponent implements OnInit {
   displayedColumns: string[] = ['titre', 'description', 'image', 'statusEvent', 'type', 'btn_href', 'btn_name', 'created', 'updated', 'deleted', 'reservations', 'actions'];
@@ -66,7 +67,10 @@ export class ListEventsComponent implements OnInit {
       map(response => response.count) // Adjust based on actual response structure
     );
   }
-  
+
+  navigateToReservations(eventId: string): void {
+    this.router.navigate([`/reservations/event/${eventId}`]);
+  }
 
   deleteEvent(id: string): void {
     if (confirm('Are you sure you want to delete this event?')) {

@@ -1,0 +1,32 @@
+<h1 class="reservations-title">Reservations</h1>
+<div *ngIf="reservations.length > 0; else noReservations">
+    <mat-card class="reservations-container">
+      <mat-card-content>
+        <div class="cards-wrapper">
+          <mat-card *ngFor="let reservation of reservations" class="reservation-card">
+            <mat-card-header>
+              <mat-card-title>{{ reservation.nom }} {{ reservation.prenom }}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p><strong>Matricule:</strong> {{ reservation.matricule }}</p>
+              <p><strong>Date:</strong> {{ reservation.date | date:'shortDate' }}</p>
+              <p><strong>Post:</strong> {{ reservation.post }}</p>
+              <p><strong>Phone:</strong> {{ reservation.numtel }}</p>
+              <p><strong>Email:</strong> <a [href]="'mailto:' + reservation.email">{{ reservation.email }}</a></p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
+  <ng-template #noReservations>
+    <mat-card class="no-reservations-card">
+      <mat-card-content>
+        <p>No reservations found for this event.</p>
+      </mat-card-content>
+    </mat-card>
+  </ng-template>
+  <a mat-flat-button href="/ListeEvents" class="text-white" style="background-color: rgb(83, 172, 83);">
+    
+Précedent  </a>
