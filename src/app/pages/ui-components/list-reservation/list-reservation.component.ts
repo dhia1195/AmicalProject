@@ -1,21 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ReservationsService } from 'src/app/services/reservations.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-list-reservation',
   templateUrl: './list-reservation.component.html',
   styleUrls: ['./list-reservation.component.scss'],
   standalone: true,
-  imports: [CommonModule],
-  providers: [DatePipe] 
+  imports: [CommonModule, FormsModule],
+  providers: [DatePipe]
 })
 export class ListReservationComponent implements OnInit {
   reservations: any[] = [];
   paginatedReservations: any[] = [];
   errorMessage: string = '';
   currentEvent: any = null;
-  pageSize: number = 10;
+  selectedReservation: any = null; // Holds the reservation currently being edited
+  pageSize: number = 5;
   currentPage: number = 0;
   totalPages: number = 0;
 
@@ -68,13 +70,37 @@ export class ListReservationComponent implements OnInit {
   }
 
   onPageChange(page: number): void {
-    this.currentPage = page;
-    this.updatePaginatedReservations();
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.updatePaginatedReservations();
+    }
   }
 
   getPageRange(): string {
     const start = this.currentPage * this.pageSize + 1;
     const end = Math.min((this.currentPage + 1) * this.pageSize, this.reservations.length);
     return `${start} - ${end}`;
+  }
+
+  openUpdateForm(reservation: any): void {
+    this.selectedReservation = { ...reservation }; // Clone the reservation to edit
+  }
+
+  updateReservation(): void {
+    if (this.selectedReservation) {
+      this.reservationsService.updateReservation(this.selectedReservation._id, this.selectedReservation).subscribe({
+        next: () => {
+          this.getAllReservations(); // Refresh the list after updating
+          this.selectedReservation = null; // Close the form
+        },
+        error: (error) => {
+          console.error('Error updating reservation:', error);
+        }
+      });
+    }
+  }
+
+  cancelUpdate(): void {
+    this.selectedReservation = null; // Close the form without saving
   }
 }

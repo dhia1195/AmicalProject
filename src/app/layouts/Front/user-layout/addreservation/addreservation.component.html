@@ -1,71 +1,131 @@
 <div class="container">
-    <h2>Add Reservation</h2>
-    <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="matricule">Matricule:</label>
-        <input id="matricule" formControlName="matricule" class="form-control" />
-        <div *ngIf="reservationForm.get('matricule')?.invalid && reservationForm.get('matricule')?.touched" class="text-danger">
-          Matricule is required.
-        </div>
+  <h2 class="mb-4">Add Reservation</h2>
+  <form [formGroup]="reservationForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Matricule Field -->
+    <div class="form-group">
+      <label for="matricule">Matricule:</label>
+      <input 
+        id="matricule" 
+        formControlName="matricule" 
+        class="form-control" 
+        placeholder="Enter matricule" />
+      <div *ngIf="reservationForm.get('matricule')?.invalid && reservationForm.get('matricule')?.touched" class="text-danger">
+        Matricule is required.
       </div>
-  
-      <div class="form-group">
-        <label for="date">Date:</label>
-        <input id="date" type="date" formControlName="date" class="form-control" />
-        <div *ngIf="reservationForm.get('date')?.invalid && reservationForm.get('date')?.touched" class="text-danger">
-          Date is required.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="nom">Nom:</label>
-        <input id="nom" formControlName="nom" class="form-control" />
-        <div *ngIf="reservationForm.get('nom')?.invalid && reservationForm.get('nom')?.touched" class="text-danger">
-          Nom is required.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="prenom">Prenom:</label>
-        <input id="prenom" formControlName="prenom" class="form-control" />
-        <div *ngIf="reservationForm.get('prenom')?.invalid && reservationForm.get('prenom')?.touched" class="text-danger">
-          Prenom is required.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="post">Post:</label>
-        <input id="post" formControlName="post" class="form-control" />
-        <div *ngIf="reservationForm.get('post')?.invalid && reservationForm.get('post')?.touched" class="text-danger">
-          Post is required.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="numtel">Numéro de Téléphone:</label>
-        <input id="numtel" formControlName="numtel" class="form-control" />
-        <div *ngIf="reservationForm.get('numtel')?.invalid && reservationForm.get('numtel')?.touched" class="text-danger">
-          Valid phone number is required.
-        </div>
-      </div>
-  
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input id="email" type="email" formControlName="email" class="form-control" />
-        <div *ngIf="reservationForm.get('email')?.invalid && reservationForm.get('email')?.touched" class="text-danger">
-          Valid email is required.
-        </div>
-      </div>
-  
-      <button type="submit" class="btn btn-primary" [disabled]="reservationForm.invalid">Add Reservation</button>
-    </form>
-  
-    <div *ngIf="successMessage" class="alert alert-success mt-3">
-      {{ successMessage }}
     </div>
-  
-    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
-      {{ errorMessage }}
+    
+    <!-- DateD Field -->
+    <div class="form-group">
+      <label for="dateD">Date de Début:</label>
+      <input 
+        id="dateD" 
+        type="datetime-local" 
+        formControlName="dateD" 
+        class="form-control" />
+      <div *ngIf="reservationForm.get('dateD')?.invalid && reservationForm.get('dateD')?.touched" class="text-danger">
+        Date de Début is required.
+      </div>
     </div>
+
+    <!-- DateF Field -->
+    <div class="form-group">
+      <label for="dateF">Date de Fin:</label>
+      <input 
+        id="dateF" 
+        type="datetime-local" 
+        formControlName="dateF" 
+        class="form-control" />
+      <div *ngIf="reservationForm.get('dateF')?.invalid && reservationForm.get('dateF')?.touched" class="text-danger">
+        Date de Fin is required.
+      </div>
+      <div *ngIf="reservationForm.errors && reservationForm.errors['dateInvalid']" class="text-danger">
+        Date de Fin must be after Date de Début.
+      </div>
+    </div>
+
+    <!-- Nom Field -->
+    <div class="form-group">
+      <label for="nom">Nom:</label>
+      <input 
+        id="nom" 
+        formControlName="nom" 
+        class="form-control" 
+        placeholder="Enter your last name" />
+      <div *ngIf="reservationForm.get('nom')?.invalid && reservationForm.get('nom')?.touched" class="text-danger">
+        Nom is required.
+      </div>
+    </div>
+
+    <!-- Prenom Field -->
+    <div class="form-group">
+      <label for="prenom">Prénom:</label>
+      <input 
+        id="prenom" 
+        formControlName="prenom" 
+        class="form-control" 
+        placeholder="Enter your first name" />
+      <div *ngIf="reservationForm.get('prenom')?.invalid && reservationForm.get('prenom')?.touched" class="text-danger">
+        Prénom is required.
+      </div>
+    </div>
+
+    <!-- Post Field -->
+    <div class="form-group">
+      <label for="post">Post:</label>
+      <input 
+        id="post" 
+        formControlName="post" 
+        class="form-control" 
+        placeholder="Enter your position" />
+      <div *ngIf="reservationForm.get('post')?.invalid && reservationForm.get('post')?.touched" class="text-danger">
+        Post is required.
+      </div>
+    </div>
+
+    <!-- Numtel Field -->
+    <div class="form-group">
+      <label for="numtel">Numéro de Téléphone:</label>
+      <input 
+        id="numtel" 
+        formControlName="numtel" 
+        class="form-control" 
+        placeholder="Enter phone number" />
+      <div *ngIf="reservationForm.get('numtel')?.invalid && reservationForm.get('numtel')?.touched" class="text-danger">
+        Valid phone number is required.
+      </div>
+    </div>
+
+    <!-- Email Field -->
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input 
+        id="email" 
+        type="email" 
+        formControlName="email" 
+        class="form-control" 
+        placeholder="Enter your email" />
+      <div *ngIf="reservationForm.get('email')?.invalid && reservationForm.get('email')?.touched" class="text-danger">
+        Valid email is required.
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      class="btn btn-primary" 
+      [disabled]="reservationForm.invalid">
+      Add Reservation
+    </button>
+  </form>
+
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success mt-3">
+    {{ successMessage }}
   </div>
-  
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+    {{ errorMessage }}
+  </div>
+</div>

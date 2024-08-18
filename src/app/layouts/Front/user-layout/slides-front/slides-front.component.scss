@@ -1,21 +1,62 @@
-  .carousel-caption {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    padding: 15px;
-    border-radius: 5px;
+/* Carousel Styles */
+/* slides-front.component.scss */
+
+.success-snackbar {
+  background-color: #4caf50; /* Green */
+  color: #fff;
+}
+
+.error-snackbar {
+  background-color: #f44336; /* Red */
+  color: #fff;
+}
+
+#carouselExampleControls {
+  .carousel-inner {
+    height: 400px; /* Set a fixed height for the carousel, adjust as needed */
+    position: relative;
+
+    .carousel-item {
+      height: 100%;
+      
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures images cover the entire container */
+        object-position: center; /* Centers the image */
+      }
+      
+      
+      .carousel-caption {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 5px;
+
+        h5 {
+          margin-bottom: 5px;
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+    }
   }
 
-  .carousel-caption h5 {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: bold;
-  }
+  .carousel-control-prev, .carousel-control-next {
+    width: 5%;
+    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1; /* Ensures controls are on top */
 
-  .carousel-caption p {
-    margin: 5px 0 0;
-    font-size: 1.2rem;
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+      background-color: rgba(0, 0, 0, 0.5); /* Optional: to make controls more visible */
+    }
   }
+}

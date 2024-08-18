@@ -1,9 +1,10 @@
 <h1>Conventions</h1>
+<br>
 <div *ngIf="errorMessage" class="alert alert-danger">
   {{ errorMessage }}
 </div>
 
-<div *ngIf="conventions.length > 0; else noData">
+<div *ngIf="displayedConventions.length > 0; else noData">
   <div class="container-fluid">
     <div class="row">
       <div class="col-auto">
@@ -34,18 +35,16 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let convention of conventions">
+        <tr *ngFor="let convention of displayedConventions">
           <td>{{ convention.titre }}</td>
           <td>{{ convention.statusConvention }}</td>
-          <td>{{ convention.date | date:'shortDate' }}</td>
+          <td>{{ convention.date | date: 'dd MMM yyyy, HH:mm' }}</td>
           <td>
             <iframe *ngIf="convention.image"
                     [src]="getSanitizedUrl(convention.image)"
                     style="width: 100%; height: 500px; border: none;">
             </iframe>
           </td>
-          
-          
           <td>{{ convention.type }}</td>
           <td>
             <button (click)="deleteConvention(convention._id)" class="btn btn-danger btn-sm">
@@ -60,6 +59,17 @@
         </tr>
       </tbody>
     </table>
+
+    <!-- Pagination controls -->
+    <div class="d-flex justify-content-between align-items-center mt-3">
+      <button mat-button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">
+        Previous
+      </button>
+      <span>Page {{currentPage + 1}} of {{totalPages}}</span>
+      <button mat-button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage + 1 >= totalPages">
+        Next
+      </button>
+    </div>
   </div>
 </div>
 

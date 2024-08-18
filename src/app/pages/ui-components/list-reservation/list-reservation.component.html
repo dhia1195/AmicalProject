@@ -1,4 +1,5 @@
 <h1>Reservations</h1>
+<br>
 <div *ngIf="reservations.length === 0">
   No reservations found.
 </div>
@@ -7,7 +8,8 @@
   <thead>
     <tr>
       <th>Matricule</th>
-      <th>Date</th>
+      <th>Date Début</th>
+      <th>Date Fin</th>
       <th>Nom</th>
       <th>Prénom</th>
       <th>Post</th>
@@ -20,7 +22,8 @@
   <tbody>
     <tr *ngFor="let reservation of paginatedReservations">
       <td>{{ reservation.matricule }}</td>
-      <td>{{ reservation.date | date: 'short' }}</td>
+      <td>{{ reservation.dateD | date: 'dd MMM yyyy, HH:mm' }}</td>
+      <td>{{ reservation.dateF | date: 'dd MMM yyyy, HH:mm' }}</td>
       <td>{{ reservation.nom }}</td>
       <td>{{ reservation.prenom }}</td>
       <td>{{ reservation.post }}</td>
@@ -48,6 +51,7 @@
         </div>
       </td>
       <td>
+        <button class="update-button" (click)="openUpdateForm(reservation)">Update</button>
         <button (click)="deleteReservation(reservation._id)">Delete</button>
       </td>
     </tr>
@@ -59,4 +63,39 @@
   <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 0">Previous</button>
   <span>Page {{ currentPage + 1 }} of {{ totalPages }}</span>
   <button (click)="onPageChange(currentPage + 1)" [disabled]="(currentPage + 1) * pageSize >= reservations.length">Next</button>
+</div>
+
+<!-- Update Form Modal -->
+<div *ngIf="selectedReservation" class="modal">
+  <div class="modal-content">
+    <h2>Update Reservation</h2>
+    <form (ngSubmit)="updateReservation()">
+      <label>Matricule:</label>
+      <input [(ngModel)]="selectedReservation.matricule" name="matricule" required>
+
+      <label>Date Début:</label>
+      <input [(ngModel)]="selectedReservation.dateD" name="dateD" type="datetime-local" required>
+
+      <label>Date Fin:</label>
+      <input [(ngModel)]="selectedReservation.dateF" name="dateF" type="datetime-local" required>
+
+      <label>Nom:</label>
+      <input [(ngModel)]="selectedReservation.nom" name="nom" required>
+
+      <label>Prénom:</label>
+      <input [(ngModel)]="selectedReservation.prenom" name="prenom" required>
+
+      <label>Post:</label>
+      <input [(ngModel)]="selectedReservation.post" name="post" required>
+
+      <label>Numéro de téléphone:</label>
+      <input [(ngModel)]="selectedReservation.numtel" name="numtel" required>
+
+      <label>Email:</label>
+      <input [(ngModel)]="selectedReservation.email" name="email" required>
+
+      <button type="submit">Save</button>
+      <button type="button" (click)="cancelUpdate()">Cancel</button>
+    </form>
+  </div>
 </div>

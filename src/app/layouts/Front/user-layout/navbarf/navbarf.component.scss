@@ -65,3 +65,6 @@
     background-image: url('data:image/svg+xml;base64,...'); /* Ensure toggle icon is visible */
   }
 }
+html {
+  scroll-behavior: smooth;
+}

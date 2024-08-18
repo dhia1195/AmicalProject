@@ -22,14 +22,15 @@ export class AddreservationComponent implements OnInit {
   ) {
     this.reservationForm = this.fb.group({
       matricule: ['', Validators.required],
-      date: ['', Validators.required],
+      dateD: ['', Validators.required],
+      dateF: ['', Validators.required],
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
       post: ['', Validators.required],
       numtel: ['', [Validators.required, Validators.pattern('^[0-9]{8}$')]],
       email: ['', [Validators.required, Validators.email]],
-      event: ['']  // Initially empty, will be set from route parameter
-    });
+      event: ['']
+    }, { validators: this.dateRangeValidator });
   }
 
   ngOnInit(): void {
@@ -38,33 +39,40 @@ export class AddreservationComponent implements OnInit {
       if (this.eventId) {
         this.reservationForm.patchValue({ event: this.eventId });
       }
-      console.log('Event ID:', this.eventId); 
     });
   }
-  
+
+  // Custom Validator Function
+  dateRangeValidator(form: FormGroup): { [key: string]: any } | null {
+    const dateD = form.get('dateD')?.value;
+    const dateF = form.get('dateF')?.value;
+
+    if (dateD && dateF && new Date(dateF) <= new Date(dateD)) {
+      return { dateInvalid: true };
+    }
+    return null;
+  }
 
   onSubmit(): void {
     if (this.reservationForm.invalid) {
+      console.log('Form Errors:', this.reservationForm.errors);
       return;
     }
     const confirmation = window.confirm('Are you sure you want to make this reservation?');
     if (!confirmation) {
-      return; 
+      return;
     }
-    console.log('Form Value:', this.reservationForm.value); 
-  
     this.reservationsService.reserveEvent(this.reservationForm.value)
       .subscribe(
         response => {
           this.successMessage = 'Reservation added successfully!';
           this.reservationForm.reset();
-          this.router.navigate(['/front/eventsf']); 
+          this.router.navigate(['/front/eventsf']);
         },
         error => {
           this.errorMessage = 'Failed to add reservation.';
-          console.error('Error:', error); 
+          console.error('Error:', error);
         }
       );
   }
-  
 }

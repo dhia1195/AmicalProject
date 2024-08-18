@@ -43,5 +43,7 @@ export class ReservationsService {
       })
     );
   }
-  
+  verifyReservation(token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/verify`, { token });
+  }
 }

@@ -19,6 +19,9 @@ import { MatCardModule } from '@angular/material/card';
 import { EventDetailsComponent } from './event-details/event-details.component';
 import { MaterialModule } from 'src/app/material.module';
 import { ConventionsfrontComponent } from './conventionsfront/conventionsfront.component';
+import { FooterComponent } from './footer/footer.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -31,6 +34,10 @@ import { ConventionsfrontComponent } from './conventionsfront/conventionsfront.c
     MatButtonModule,
     MatCardModule,
     MaterialModule,
+    ReactiveFormsModule,
+    MatDialogModule,    
+    MatSnackBarModule,
+
 
     
   
@@ -40,10 +47,12 @@ import { ConventionsfrontComponent } from './conventionsfront/conventionsfront.c
     SlidesFrontComponent,
     UserLayoutComponent,
     EventsfrontComponent,
+    
    
     AddreservationComponent,
     EventDetailsComponent,
     ConventionsfrontComponent,
+    FooterComponent,
     
   ]
 })

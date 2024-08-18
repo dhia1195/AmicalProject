@@ -11,7 +11,7 @@
           <h5 class="card-title">{{ convention.titre }}</h5>
           <p class="card-text">
             <strong>Status:</strong> {{ convention.statusConvention }}<br>
-            <strong>Date:</strong> {{ convention.date | date:'shortDate' }}<br>
+            <strong>Date:</strong> {{ convention.date | date: 'dd MMM yyyy, HH:mm' }}<br>
             <strong>Type:</strong> {{ convention.type }}
           </p>
           <a *ngIf="convention.pdf" [href]="convention.pdf" target="_blank" class="btn btn-primary btn-sm">

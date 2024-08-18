@@ -19,7 +19,11 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class ListConventionsComponent implements OnInit {
   conventions: any[] = [];
+  displayedConventions: any[] = [];
   errorMessage: string = '';
+  currentPage: number = 0;
+  totalPages: number = 1;
+  itemsPerPage: number = 1; // Adjust the number of items per page
 
   constructor(private conventionsService: ConventionsService, private sanitizer: DomSanitizer) {}
 
@@ -33,6 +37,8 @@ export class ListConventionsComponent implements OnInit {
     this.conventionsService.getAllConventions().subscribe({
       next: (response) => {
         this.conventions = response.conventions;
+        this.totalPages = Math.ceil(this.conventions.length / this.itemsPerPage);
+        this.updateDisplayedConventions();
       },
       error: (error) => {
         this.errorMessage = 'Failed to load conventions. Please try again later.';
@@ -41,17 +47,32 @@ export class ListConventionsComponent implements OnInit {
     });
   }
 
+  updateDisplayedConventions(): void {
+    const startIndex = this.currentPage * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.displayedConventions = this.conventions.slice(startIndex, endIndex);
+  }
+
   deleteConvention(id: string): void {
     this.conventionsService.deleteConvention(id).subscribe({
       next: () => {
         // Remove deleted convention from local array
         this.conventions = this.conventions.filter(convention => convention._id !== id);
+        this.totalPages = Math.ceil(this.conventions.length / this.itemsPerPage);
+        this.updateDisplayedConventions();
       },
       error: (error) => {
         this.errorMessage = 'Failed to delete convention. Please try again later.';
         console.error('Error:', error);
       }
     });
+  }
+
+  onPageChange(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.updateDisplayedConventions(); // Update the displayed conventions for the selected page
+    }
   }
 
   generatePdf(convention: any): void {
@@ -87,6 +108,4 @@ export class ListConventionsComponent implements OnInit {
     const pdfData = base64Data.startsWith(base64Prefix) ? base64Data : base64Prefix + base64Data;
     return this.sanitizer.bypassSecurityTrustResourceUrl(pdfData);
   }
-  
-  }
-
+}

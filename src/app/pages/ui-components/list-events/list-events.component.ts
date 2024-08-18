@@ -15,12 +15,18 @@ import { MatBadgeModule } from '@angular/material/badge';
   templateUrl: './list-events.component.html',
   styleUrls: ['./list-events.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatTableModule, MatButtonModule, MatIconModule, MatBadgeModule,],
+  imports: [CommonModule, ReactiveFormsModule, MatTableModule, MatButtonModule, MatIconModule, MatBadgeModule],
 })
 export class ListEventsComponent implements OnInit {
   displayedColumns: string[] = ['titre', 'description', 'image', 'statusEvent', 'type', 'btn_href', 'btn_name', 'created', 'updated', 'deleted', 'reservations', 'actions'];
   dataSource = new MatTableDataSource<any>();
   errorMessage: string = '';
+
+  // Pagination variables
+  pageSize: number = 4;
+  currentPage: number = 0;
+  totalPages: number = 0;
+  paginatedEvents: any[] = [];
 
   constructor(
     private eventsService: EventsService,
@@ -37,6 +43,8 @@ export class ListEventsComponent implements OnInit {
       next: (data) => {
         const events = data.events;
         this.dataSource.data = events;
+        this.totalPages = Math.ceil(events.length / this.pageSize);
+        this.updatePaginatedEvents();
         events.forEach(event => {
           this.countReservationsForEvent(event._id).subscribe({
             next: (count) => {
@@ -46,7 +54,7 @@ export class ListEventsComponent implements OnInit {
                 console.error('Unexpected response format:', count);
                 event.reservations = 0;
               }
-              this.dataSource.data = [...this.dataSource.data];
+              this.updatePaginatedEvents(); // Ensure reservations count updates on the paginated list
             },
             error: (error) => {
               console.error('Error fetching reservation count:', error);
@@ -61,11 +69,17 @@ export class ListEventsComponent implements OnInit {
       }
     });
   }
-  
+
   countReservationsForEvent(eventId: string) {
     return this.reservationService.countReservationsForEvent(eventId).pipe(
       map(response => response.count) // Adjust based on actual response structure
     );
+  }
+
+  updatePaginatedEvents(): void {
+    const startIndex = this.currentPage * this.pageSize;
+    const endIndex = startIndex + this.pageSize;
+    this.paginatedEvents = this.dataSource.data.slice(startIndex, endIndex);
   }
 
   navigateToReservations(eventId: string): void {
@@ -87,5 +101,18 @@ export class ListEventsComponent implements OnInit {
 
   updateEvent(id: string): void {
     this.router.navigate(['/updateEvents', id]); // Navigate to the update page with the event ID
+  }
+
+  onPageChange(page: number): void {
+    if (page >= 0 && page < this.totalPages) {
+      this.currentPage = page;
+      this.updatePaginatedEvents();
+    }
+  }
+
+  getPageRange(): string {
+    const start = this.currentPage * this.pageSize + 1;
+    const end = Math.min((this.currentPage + 1) * this.pageSize, this.dataSource.data.length);
+    return `${start} - ${end}`;
   }
 }

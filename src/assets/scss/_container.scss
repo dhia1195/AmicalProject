@@ -26,9 +26,12 @@ html .mat-drawer-container {
 .pageWrapper {
   padding: 24px;
   min-height: calc(100vh - 70px);
-  margin: 0 auto;
-  max-width: $boxedWidth;
+  margin-left: -20px; /* Moves the content more to the left */
+  margin-right: 20px; /* Optional: Adjusts the right margin for better alignment */
+  max-width: calc(100% - 40px); /* Ensures proper width and alignment */
+  box-sizing: border-box; /* Includes padding in the width calculation */
 }
+
 
 .w-100 {
   width: 100%;
