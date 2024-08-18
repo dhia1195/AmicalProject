@@ -14,9 +14,6 @@ export class Reservations{
 
   @Prop({ required: true})
   matricule: string;
-
-  
-
   @Prop({ required: true})
   dateD: Date;
   @Prop({ required: true})
@@ -34,9 +31,14 @@ export class Reservations{
   @Prop({ type: Types.ObjectId, ref: 'Events' })
   event: Events;
 
- 
+  @Prop({ default: false })
+  verified: boolean;
 
+  @Prop({ enum: ['pending', 'confirmed'], default: 'pending' })
+  status: string;
 
+  @Prop()
+  verificationToken: string;
 
   
 }
