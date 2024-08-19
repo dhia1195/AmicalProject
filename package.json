@@ -23,13 +23,14 @@
     "angular-tabler-icons": "^2.7.0",
     "apexcharts": "^3.35.3",
     "bootstrap": "^5.3.3",
+    "html2pdf.js": "^0.10.1",
+    "jspdf": "^2.5.1",
     "ng-apexcharts": "1.7.1",
     "pdfmake": "^0.2.10",
-    "jspdf": "^2.5.1",
-    "html2pdf.js": "^0.10.1",
     "rxjs": "~7.5.0",
     "sass": "^1.57.1",
     "tslib": "^2.3.0",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.12.0"
   },
   "devDependencies": {

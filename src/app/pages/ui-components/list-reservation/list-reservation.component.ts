@@ -2,21 +2,27 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ReservationsService } from 'src/app/services/reservations.service';
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import * as XLSX from 'xlsx'; // Import the xlsx library
 
 @Component({
   selector: 'app-list-reservation',
   templateUrl: './list-reservation.component.html',
   styleUrls: ['./list-reservation.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatIconModule],
   providers: [DatePipe]
 })
 export class ListReservationComponent implements OnInit {
   reservations: any[] = [];
   paginatedReservations: any[] = [];
+  filteredReservations: any[] = [];
+  searchEmail: string = '';
   errorMessage: string = '';
   currentEvent: any = null;
-  selectedReservation: any = null; // Holds the reservation currently being edited
+  selectedReservation: any = null;
   pageSize: number = 5;
   currentPage: number = 0;
   totalPages: number = 0;
@@ -32,6 +38,7 @@ export class ListReservationComponent implements OnInit {
       next: (response) => {
         console.log('Reservations Data:', response);
         this.reservations = response.reservations;
+        this.filteredReservations = this.reservations;
         this.totalPages = Math.ceil(this.reservations.length / this.pageSize);
         this.updatePaginatedReservations();
       },
@@ -42,17 +49,27 @@ export class ListReservationComponent implements OnInit {
     });
   }
 
+  filterReservations(): void {
+    if (this.searchEmail) {
+      this.filteredReservations = this.reservations.filter(reservation =>
+        reservation.email.toLowerCase().includes(this.searchEmail.toLowerCase())
+      );
+    } else {
+      this.filteredReservations = this.reservations;
+    }
+    this.updatePaginatedReservations();
+  }
+
   updatePaginatedReservations(): void {
     const startIndex = this.currentPage * this.pageSize;
-    const endIndex = startIndex + this.pageSize;
-    this.paginatedReservations = this.reservations.slice(startIndex, endIndex);
+    this.paginatedReservations = this.filteredReservations.slice(startIndex, startIndex + this.pageSize);
   }
 
   deleteReservation(id: string): void {
     if (confirm('Are you sure you want to delete this reservation?')) {
       this.reservationsService.deleteReservation(id).subscribe({
         next: () => {
-          this.getAllReservations(); // Refresh the list after deletion
+          this.getAllReservations();
         },
         error: (error) => {
           console.error('Error deleting reservation:', error);
@@ -83,15 +100,15 @@ export class ListReservationComponent implements OnInit {
   }
 
   openUpdateForm(reservation: any): void {
-    this.selectedReservation = { ...reservation }; // Clone the reservation to edit
+    this.selectedReservation = { ...reservation };
   }
 
   updateReservation(): void {
     if (this.selectedReservation) {
       this.reservationsService.updateReservation(this.selectedReservation._id, this.selectedReservation).subscribe({
         next: () => {
-          this.getAllReservations(); // Refresh the list after updating
-          this.selectedReservation = null; // Close the form
+          this.getAllReservations();
+          this.selectedReservation = null;
         },
         error: (error) => {
           console.error('Error updating reservation:', error);
@@ -101,6 +118,13 @@ export class ListReservationComponent implements OnInit {
   }
 
   cancelUpdate(): void {
-    this.selectedReservation = null; // Close the form without saving
+    this.selectedReservation = null;
+  }
+
+  // Method to generate the Excel file
+  generateExcel(): void {
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.reservations);
+    const workbook: XLSX.WorkBook = { Sheets: { 'Reservations': worksheet }, SheetNames: ['Reservations'] };
+    XLSX.writeFile(workbook, 'Reservations.xlsx');
   }
 }

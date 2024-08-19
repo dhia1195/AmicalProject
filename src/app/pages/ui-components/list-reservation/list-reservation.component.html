@@ -1,5 +1,22 @@
 <h1>Reservations</h1>
 <br>
+<div class="button-container">
+  <button mat-raised-button class="custom-excel-button" (click)="generateExcel()">
+    <mat-icon>file_download</mat-icon> Download Excel
+  </button>
+</div>
+
+
+<div class="search-container">
+  <mat-form-field class="elevated-search-field" appearance="outline">
+    <mat-label>Search by email</mat-label>
+    <mat-icon matPrefix>search</mat-icon>
+    <input matInput [(ngModel)]="searchEmail" (ngModelChange)="filterReservations()" />
+    <mat-hint>Type an email to filter reservations</mat-hint>
+  </mat-form-field>
+</div>
+
+
 <div *ngIf="reservations.length === 0">
   No reservations found.
 </div>
