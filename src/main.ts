@@ -7,7 +7,6 @@ import * as express from 'express';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // Configuration de CORS
   app.enableCors();
 
   app.use(bodyParser.json({ limit: '50mb' }));  
