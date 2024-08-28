@@ -10,7 +10,7 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb+srv://jojo22042000:AYtW8PsbxZJfJpxH@cluster0.y4ssp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
+    MongooseModule.forRoot('mongodb+srv://meddhiadinboudali:35g6Ujan3v9gmKH8@cluster0.koajc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
     EventsModule,
     SlidesModule,
     ReservationsModule,
@@ -21,3 +21,5 @@ import { UserModule } from './user/user.module';
   providers: [AppService],
 })
 export class AppModule {}
+
+//MongooseModule.forRoot('mongodb+srv://jojo22042000:AYtW8PsbxZJfJpxH@cluster0.y4ssp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
