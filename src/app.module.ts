@@ -10,7 +10,7 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://127.0.0.1:27017/amical'),
+    MongooseModule.forRoot('mongodb+srv://jojo22042000:AYtW8PsbxZJfJpxH@cluster0.y4ssp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'),
     EventsModule,
     SlidesModule,
     ReservationsModule,
